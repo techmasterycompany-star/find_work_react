@@ -1,30 +1,34 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-// import Button from './modules/employer/components/Button'
-import NavBarLinks from './modules/employer/components/EmployerNavBar'
-// import { Footer } from './modules/employer/components/Footer'
-import { Route, Routes } from 'react-router-dom'
-import EmployerHome from './modules/employer/pages/EmployerHome'
-import { UserContext, UserProvider } from './context/UsersContext'
-import { JobProvider } from './context/JobContext'
-import { AppRoutes } from './app/routes'
+import { Routes, Route } from "react-router-dom";
 
+import Login from "./modules/auth/pages/Login";
+import RoleSelect from "./modules/auth/pages/RoleSelect";
+import EmployerSignUp from "./modules/auth/pages/employerSignUp";
+import CandidateSignUp from "./modules/auth/pages/candidateSignUp";
+import Congrats from "./modules/auth/pages/Congrats";
+
+import "./App.css";
+
+import { UserProvider } from "./context/UsersContext";
+import { JobProvider } from "./context/JobContext";
+import { AppRoutes } from "./app/routes";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-       <UserProvider>
-         <JobProvider>
-           <AppRoutes/>
-         </JobProvider>
-        </UserProvider>
-    </>
-  )
+    <UserProvider>
+      <JobProvider>
+        <AppRoutes />
+
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/role-select" element={<RoleSelect />} />
+          <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
+          <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
+          <Route path="/auth/congratulations" element={<Congrats />} />
+        </Routes>
+      </JobProvider>
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
