@@ -1,6 +1,6 @@
 import { HiArrowRight } from "react-icons/hi";
 import CandidateList from "./Candidateslist.jsx";
-
+import {  NavLink } from "react-router-dom";
 
 
 export default function TopCandidates() {
@@ -17,9 +17,11 @@ export default function TopCandidates() {
           </p>
         </div>
         <div className="flex gap-1 items-center">
-          <button className="text-sm font-bold text-primary">
+          <NavLink to="candidatespage">
+          <button className="text-sm font-bold text-primary cursor-pointer hover:underline">
             Browse All Candidates
           </button>
+          </NavLink>
           <HiArrowRight className="text-primary" />
         </div>
       </div>

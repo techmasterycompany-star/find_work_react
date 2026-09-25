@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 export default function CandidateList(){
     const {candidatedata} = useContext(UserContext);
-    let candidatelist = candidatedata.map((candidates) => {
+    let candidatelist = candidatedata.slice(0,4).map((candidates) => {
       return (
         <div className="card bg-card-2 p-5 rounded-md" key={candidates.id}>
           <div className="info flex gap-3 mb-4">

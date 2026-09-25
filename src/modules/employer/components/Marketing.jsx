@@ -9,7 +9,7 @@ export default function Marketing(){
           </div>
           <h3 className="mb-3 text-4xl font-bold text-text-primary">Find your next great hire, faster.</h3>
           <p className="font-normal text-md w-[700px] text-text-secondary">Post jobs, search candidates, and connect with top talent in minutes. Join over 10,000 companies already hiring smarter.</p>
-          <Input/> {/*component*/}
+          <Input btntext="Find Talent" firstplaceholder="Search candidates by skill, role, or keyword" secondplaceholder="location"/> {/*component*/}
           <div className="mt-6 flex-gap24">
              <div className="text-[12px] font-normal text-text-secondary flex-gap6">
                <div className="w-2 h-2 rounded-2sm bg-status-green-dark"></div>
@@ -30,10 +30,3 @@ export default function Marketing(){
     );
 }
 
-
-
-// export default function JobInfo(){
-//     return(
-       
-//     );
-// }

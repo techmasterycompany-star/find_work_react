@@ -66,7 +66,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="shapes z-0 ">
-        <div className="w-[520px] h-[520px]  z-[-2] absolute left-[-180px] top-[80px] bg-radial from-section-1 from-50% from-50% to-section-1-linear to-100% mix-blend-multiply blur-3xl"></div>
+        <div className="w-[520px] h-[520px]  z-[-2] absolute left-[-180px] top-[80px] bg-radial from-section-1 from-[50%] from-[50%] to-section-1-linear to-[100%] mix-blend-multiply blur-3xl"></div>
         <div className="w-[380px] h-[380px]  z-[-2] absolute left-[-120px] top-[130px]  rounded-full bg-[#F3E8FF] mix-blend-multiply blur-3xl opacity-40"></div>
         <div className="w-[380px] h-[380px]  z-[-2] absolute right-[0px] top-[-20px] rounded-full bg-[#F3E8FF] opacity-[60%] "></div>
         <div className="w-[220px] h-[220px]  z-[-2] absolute right-[120px] top-[220px] rounded-full bg-[#F3E8FF] opacity-[60%] "></div>
