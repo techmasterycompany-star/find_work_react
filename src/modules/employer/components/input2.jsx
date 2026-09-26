@@ -1,0 +1,28 @@
+import { RiSearch2Line } from "react-icons/ri";
+import { HiOutlineMapPin } from "react-icons/hi2";
+import Button from "./ButtonFit";
+import { useState } from "react";
+
+export default function InputTwo({btntext,firstplaceholder}) {
+const[inputValue,setInputValue]=useState("");
+  return (
+    <div className="h-14 w-[789px] rounded-2sm px-4 bg-card-2 mt-6 flex-between">
+        <div className="flex-gap4 pr-4 w-[360px]">
+          <RiSearch2Line className="text-2xl text-text-secondary" />
+          <input
+            className="text-md font-medium w-full outline-none"
+            placeholder={firstplaceholder}
+            type="text"
+            value={inputValue}
+            onChange={(event)=>{
+              setInputValue(event.target.value);
+            }}
+          />
+        </div>
+      <div>
+        <Button>{btntext}</Button>
+      </div>
+    </div>
+  );
+}
+

@@ -3,11 +3,9 @@ import { HiOutlineMapPin } from "react-icons/hi2";
 import Button from "./ButtonFit";
 import { useState } from "react";
 
-export default function Input() {
+export default function Input({btntext,firstplaceholder,secondplaceholder}) {
 const[inputValue,setInputValue]=useState("");
 const[locationInputValue,setlocationInputValue]=useState("");
-
-
   return (
     <div className="h-14 w-[789px] rounded-2sm px-4 bg-card-2  mt-6 flex-between">
       <div className="flex items-center">
@@ -15,7 +13,7 @@ const[locationInputValue,setlocationInputValue]=useState("");
           <RiSearch2Line className="text-2xl text-text-secondary" />
           <input
             className="text-md font-medium w-full outline-none"
-            placeholder="Search candidates by skill, role, or keyword"
+            placeholder={firstplaceholder}
             type="text"
             value={inputValue}
             onChange={(event)=>{
@@ -25,14 +23,14 @@ const[locationInputValue,setlocationInputValue]=useState("");
         </div>
         <div className="flex-gap4 pl-4">
           <HiOutlineMapPin className="text-2xl text-text-secondary" />
-          <input className="text-md font-medium w-full outline-none" placeholder="Location" type="text"   value={locationInputValue}
+          <input className="text-md font-medium w-full outline-none" placeholder={secondplaceholder} type="text"   value={locationInputValue}
             onChange={(event)=>{
               setlocationInputValue(event.target.value);
             }} />
         </div>
       </div>
       <div>
-        <Button>Find Talent</Button>
+        <Button>{btntext}</Button>
       </div>
     </div>
   );
