@@ -9,6 +9,7 @@ import "./App.css";
 
 import { UserProvider } from "./context/UsersContext";
 import { JobProvider } from "./context/JobContext";
+import { AuthProvider } from "./context/AuthContext";
 import { AppRoutes } from "./app/routes";
 import { FilterProvider } from "./context/filterstates";
 
@@ -17,15 +18,18 @@ function App() {
     <UserProvider>
       <JobProvider>
         <FilterProvider>
-        <AppRoutes />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/role-select" element={<RoleSelect />} />
-          <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
-          <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
-          <Route path="/auth/congratulations" element={<Congrats />} />
-        </Routes>
+          <AuthProvider>
+            <AppRoutes />
+
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/role-select" element={<RoleSelect />} />
+              <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
+              <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
+              <Route path="/auth/congratulations" element={<Congrats />} />
+            </Routes>
+          </AuthProvider>
         </FilterProvider>
       </JobProvider>
     </UserProvider>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FormField from "../../../components/FormField";
+import { useAuth } from "../../../context/AuthContext";
 import RoleTabs from "../components/RoleTabs";
-import { login } from "../services/authApi";
 
 // Change this path to wherever your actual image is
 import loginImage from "../../../assets/Candidate Panel Graphic.png";
@@ -10,6 +10,7 @@ import logo from "../../../assets/Brand Logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [role, setRole] = useState("employer");
   const [email, setEmail] = useState("");
@@ -33,11 +34,15 @@ export default function Login() {
     setIsSubmitting(true);
 
     try {
-      const { token } = await login(role, { email, password });
+      const user = await login({ email, password });
 
-      localStorage.setItem("token", token);
-
-      navigate(role === "employer" ? "/employer/home" : "/candidate/home");
+      if (user.role === "employer") {
+        navigate("/employer");
+      } else if (user.role === "candidate") {
+        navigate("/candidate");
+      } else {
+        setErrors({ password: "Your account role is not supported." });
+      }
     } catch (err) {
       // Adjust the condition below to match however the backend actually
       // signals "account not yet approved" once you've confirmed it (a
