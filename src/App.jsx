@@ -10,22 +10,25 @@ import "./App.css";
 
 import { UserProvider } from "./context/UsersContext";
 import { JobProvider } from "./context/JobContext";
+import { AuthProvider } from "./context/AuthContext";
 import { AppRoutes } from "./app/routes";
 
 function App() {
   return (
     <UserProvider>
       <JobProvider>
-        <AppRoutes />
+        <AuthProvider>
+          <AppRoutes />
 
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/role-select" element={<RoleSelect />} />
-          <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
-          <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
-          <Route path="/auth/congratulations" element={<Congrats />} />
-        </Routes>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/role-select" element={<RoleSelect />} />
+            <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
+            <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
+            <Route path="/auth/congratulations" element={<Congrats />} />
+          </Routes>
+        </AuthProvider>
       </JobProvider>
     </UserProvider>
   );
