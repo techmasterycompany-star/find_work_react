@@ -8,6 +8,7 @@ import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage
 import ScrollToTop from "../modules/employer/components/scrolltotop";
 import CompanyPage from "../modules/employer/pages/CompanyPage";
 import CompanyDetails from "../modules/employer/pages/CompanyDetails";
+import EmployerPricingPage from "../modules/employer/pages/PricingPage";
 
 export function AppRoutes() {
   return (
@@ -33,7 +34,7 @@ export function AppRoutes() {
           </Route>
 
           <Route path="about_us" element={<EmployerHome />} />
-          <Route path="pricing" element={<EmployerHome />} />
+          <Route path="pricing" element={<EmployerPricingPage />} />
         </Route>
 
         <Route path="/candidate" element={<CandidateHome />} />
