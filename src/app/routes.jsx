@@ -6,14 +6,15 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
 import ScrollToTop from "../modules/employer/components/scrolltotop";
+import Landing from "../modules/public/pages/Landing";
 
 export function AppRoutes() {
   return (
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-
+        <Route path="/" element={<Navigate to="/landing" replace />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/employer" element={<EmployerLayout />}>
           <Route index element={<EmployerHome />} />
           <Route path="posting" element={<EmployerJobPostPage />} />
