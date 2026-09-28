@@ -1,5 +1,5 @@
 import { HiArrowRight } from "react-icons/hi2";
-import Jobs from "./Jobs";
+import Jobs from "./ActiveJobs";
 
 
 export default function JobPosting() {

@@ -6,6 +6,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
 import ScrollToTop from "../modules/employer/components/scrolltotop";
+import CompanyPage from "../modules/employer/pages/CompanyPage";
+import CompanyDetails from "../modules/employer/pages/CompanyDetails";
 
 export function AppRoutes() {
   return (
@@ -25,8 +27,11 @@ export function AppRoutes() {
               element={<CandidateProfilePage />}
             />
           </Route>
+          <Route path="/employer/companies">
+                <Route index element={<CompanyPage />} />
+                <Route path="companyprofile/:companyId" element={<CompanyDetails/>}/>
+          </Route>
 
-          <Route path="companies" element={<EmployerHome />} />
           <Route path="about_us" element={<EmployerHome />} />
           <Route path="pricing" element={<EmployerHome />} />
         </Route>

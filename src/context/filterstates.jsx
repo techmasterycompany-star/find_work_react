@@ -1,17 +1,36 @@
-import { createContext ,useState} from "react";
+import { createContext, useState } from "react";
+import { BiCategory } from "react-icons/bi";
 
 export const filtercontext = createContext();
 
-
 export function FilterProvider({ children }) {
-      const [checked, setchecked] = useState({ exp: false, available: false });
-      const [inputskillvalue, setinputskillvalue] = useState({
-        skill: "",
-        location: "",
-      });
-      const [inputjobvalue, setinputjobvalue] = useState("");
+  const [checked, setchecked] = useState({ exp: false, available: false });
+
+  const [companyChecked, setcompanyChecked] = useState({
+    categorey: [],
+    size: [],
+  });
+  const [radioChecked,setradioChecked]=useState("");
+  const [inputskillvalue, setinputskillvalue] = useState({
+    skill: "",
+    location: "",
+  });
+  const [inputjobvalue, setinputjobvalue] = useState("");
   return (
-    <filtercontext.Provider value={{ checked,setchecked,inputskillvalue,setinputskillvalue,inputjobvalue,setinputjobvalue }}>
+    <filtercontext.Provider
+      value={{
+        checked,
+        setchecked,
+        inputskillvalue,
+        setinputskillvalue,
+        inputjobvalue,
+        setinputjobvalue,
+        companyChecked,
+        setcompanyChecked,
+        radioChecked,
+        setradioChecked
+      }}
+    >
       {children}
     </filtercontext.Provider>
   );

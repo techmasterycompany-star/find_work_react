@@ -23,7 +23,7 @@ export let candidatedata = [
     profileViews: 200,
     reviews: 128,
     ratings: 5.0,
-    available:"Open To Opportunity",
+    available: "Open To Opportunity",
     HiringSuccessRate: "82%",
     location: "remote",
     Address: "Smart Village, Giza, Egypt",
@@ -43,6 +43,8 @@ export let candidatedata = [
     certificatejobgained: "Senior Full-Stack Developer",
     comment:
       "Sarah consistently delivers complex features and works effectively across both frontend and backend teams.",
+    companycomment:
+      "When I applied for a position at tech, I knew I was about to experience one of the most challenging job interviews of my career. But what I didn’t expect was the incredible combination of professionalism, creativity, and team culture throughout the process.",
     commentperson: "Omar Nabil",
     commentpersonjob: "Principal Software Engineer",
     skills: [
@@ -69,9 +71,11 @@ export let candidatedata = [
     profileViews: 500,
     reviews: 128,
     ratings: 5.0,
-    available:"Open To Opportunity",
+    available: "Open To Opportunity",
     HiringSuccessRate: "66%",
     location: "onsite",
+    companycomment:
+      "When I applied for a position at tech, I knew I was about to experience one of the most challenging job interviews of my career. But what I didn’t expect was the incredible combination of professionalism, creativity, and team culture throughout the process.",
     skills: [
       {
         skillname: "figma",
@@ -92,11 +96,11 @@ export let candidatedata = [
     desc: "",
     match: "89% Match",
     price: "$70/hr",
-      exp: "3-5 years",
+    exp: "3-5 years",
     profileViews: 200,
     reviews: 114,
     ratings: 4.6,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "97%",
     location: "hybird",
     Address: "Smart Village, Giza, Egypt",
@@ -116,6 +120,8 @@ export let candidatedata = [
     certificatejobgained: "Senior Full-Stack Developer",
     comment:
       "Marcous consistently delivers complex features and works effectively across both frontend and backend teams.",
+      companycomment:
+      "When I applied for a position at tech, I knew I was about to experience one of the most challenging job interviews of my career. But what I didn’t expect was the incredible combination of professionalism, creativity, and team culture throughout the process.",
     commentperson: "Omar Nabil",
     commentpersonjob: "Principal Software Engineer",
     skills: [
@@ -142,7 +148,7 @@ export let candidatedata = [
     profileViews: 1000,
     reviews: 92,
     ratings: 4.2,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "83%",
     location: "hybird",
     Address: "Smart Village, Giza, Egypt",
@@ -184,11 +190,11 @@ export let candidatedata = [
     desc: "",
     match: "82% Match",
     price: "$60/hr",
-     exp: "0-1 years",
+    exp: "0-1 years",
     profileViews: 100,
     reviews: 69,
     ratings: 5.0,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "97%",
     location: "remote",
     skills: [
@@ -215,7 +221,7 @@ export let candidatedata = [
     profileViews: 800,
     reviews: 88,
     ratings: 4.6,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "97%",
     location: "hybird",
     skills: [
@@ -242,7 +248,7 @@ export let candidatedata = [
     profileViews: 2000,
     reviews: 128,
     ratings: 5.0,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "77%",
     location: "onsite",
     skills: [
@@ -269,7 +275,7 @@ export let candidatedata = [
     profileViews: 2000,
     reviews: 128,
     ratings: 4.8,
-    available:"Available NOW",
+    available: "Available NOW",
     HiringSuccessRate: "72%",
     location: "remote",
     skills: [
@@ -296,7 +302,7 @@ export let candidatedata = [
     profileViews: 100,
     reviews: 69,
     ratings: 5.0,
-    available:"Open To Opportunity",
+    available: "Open To Opportunity",
     HiringSuccessRate: "97%",
     location: "hybird",
     Address: "New Cairo, Egypt",
@@ -344,7 +350,7 @@ export let candidatedata = [
     profileViews: 1000,
     reviews: 92,
     ratings: 4.2,
-    available:"Open To Opportunity",
+    available: "Open To Opportunity",
     HiringSuccessRate: "83%",
     location: "hybird",
     Address: "Smart Village, Giza, Egypt",

@@ -12,15 +12,18 @@ import { JobProvider } from "./context/JobContext";
 import { AuthProvider } from "./context/AuthContext";
 import { AppRoutes } from "./app/routes";
 import { FilterProvider } from "./context/filterstates";
+import { CompanyProvider } from "./context/CompanyContext";
+import { EmployerProvider } from "./context/EmployerContext";
 
 function App() {
   return (
     <UserProvider>
       <JobProvider>
         <FilterProvider>
-          <AuthProvider>
+          <CompanyProvider>
+            <EmployerProvider>
+             <AuthProvider>
             <AppRoutes />
-
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/auth/login" element={<Login />} />
@@ -29,7 +32,9 @@ function App() {
               <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
               <Route path="/auth/congratulations" element={<Congrats />} />
             </Routes>
-          </AuthProvider>
+            </AuthProvider>
+            </EmployerProvider>
+          </CompanyProvider>
         </FilterProvider>
       </JobProvider>
     </UserProvider>
