@@ -3,37 +3,34 @@ import { HiOutlineMoon } from "react-icons/hi";
 import { HiOutlineBell } from "react-icons/hi";
 import { HiOutlineLanguage } from "react-icons/hi2";
 import { useState } from "react";
+import photo7 from "../../../assets/photo7.jpg"
 
 let navitems = [
   {
     label: "Home",
-    Path: "/employer",
+    Path: "/candidate",
   },
   {
-    label: "Post a job",
-    Path: "/employer/posting",
-  },
-  {
-    label: "Candidates",
-    Path: "/employer/candidatespage",
+    label: "Find Jobs",
+    Path: "/candidate/FindJobs",
   },
   {
     label: "Companies",
-    Path: "/employer/companies",
+    Path: "/candidate/companies",
   },
   {
     label: "About Us",
-    Path: "/employer/about_us",
+    Path: "/candidate/about_us",
   },
   {
     label: "Pricing",
-    Path: "/employer/pricing",
+    Path: "/candidate/pricing",
   },
 ];
 
 let navlinks = navitems.map((link) => {
   return (
-    <NavLink to={link.Path} key={link.Path} end={link.Path === "/employer"}>
+    <NavLink to={link.Path} key={link.Path} end={link.Path === "/candidate"}>
       {({ isActive }) => (
         <li className="w-fit">
           <button className={isActive ? "active" : "notactive"}>
@@ -45,13 +42,13 @@ let navlinks = navitems.map((link) => {
   );
 });
 
-export default function EmployerNavBarLinks() {
+export default function CandidateNavBarLinks() {
   const [open, setopen] = useState(false);
   return (
     <>
       <nav className="flex z-100 items-center justify-between w-full h-22 rounded-2sm px-20 py-5 border-b-1 border-border1 bg-nav">
         <div className="logo w-18 h-12">
-          <img src="src\assets\logo.png" alt="logo" />
+            <img src="src\assets\logo.png" alt="logo" />
         </div>
         <div className="links">
           <ul className="flex items-center justify-around gap-1 w-[634px] h-10">
@@ -78,15 +75,15 @@ export default function EmployerNavBarLinks() {
             </div>
           </div>
           <div className="Switches flex items-center">
-            <Link to={"/candidate"}>
-              <div className="link px-8">Candidate</div>
+            <Link to={"/employer"}>
+              <div className="link px-8">Employer</div>
             </Link>
 
             <div className="profile flex items-center gap-1 px-4 border-l-2 border-border1 w-[220px] overflow-hidden">
               <div className="img w-10 h-10 relative flex items-center justify-center rounded-full border-2 border-border1 bg-amber-red">
                 <img
                   className="max-w-full rounded-full h-full"
-                  src="src\assets\company_logo.png"
+                  src={photo7}
                   alt=""
                 />
                 <div className="available absolute bg-status-green-dark w-2 h-2 rounded left-[30px] bottom-[0px]"></div>
@@ -117,14 +114,11 @@ export default function EmployerNavBarLinks() {
                 </button>
                 {open ? (
                   <div className="absolute top-20 right-10 bg-white flex flex-col w-[218px] h-[224px] z-50 rounded-2sm">
-                    <div className="h-14 w-full pl-3 flex items-center border-b-1 border-b-border1 bg-surface rounded-tr-2sm rounded-tl-2sm  hover:text-primary hover:font-semibold">
-                       <Link>Tech Company</Link>
-                    </div>
                      <div className="h-14 w-full pl-3 flex items-center border-b-1 border-b-border1 bg-surface  hover:text-primary hover:font-semibold">
                        <Link>Analytics</Link>
                     </div>
                      <div className="h-14 w-full pl-3 flex items-center border-b-1  border-b-border1 bg-surface hover:text-primary hover:font-semibold">
-                       <Link>My Jobs</Link>
+                       <Link>Saved Jobs</Link>
                     </div>
                      <div className="h-14 w-full pl-3 flex items-center border-b-1 border-b-border1 bg-surface  hover:text-primary hover:font-semibold">
                        <Link>Settings</Link>

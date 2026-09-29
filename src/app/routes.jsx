@@ -9,6 +9,7 @@ import ScrollToTop from "../modules/employer/components/scrolltotop";
 import Landing from "../modules/public/pages/Landing";
 import CompanyPage from "../modules/employer/pages/CompanyPage";
 import CompanyDetails from "../modules/employer/pages/CompanyDetails";
+import CandidateLayout from "../layouts/CandidateLayout";
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export function AppRoutes() {
       <Routes>
         <Route path="/" element={<Navigate to="/landing" replace />} />
         <Route path="/landing" element={<Landing />} />
+        {/* employer flow */}
         <Route path="/employer" element={<EmployerLayout />}>
           <Route index element={<EmployerHome />} />
           <Route path="posting" element={<EmployerJobPostPage />} />
@@ -40,8 +42,23 @@ export function AppRoutes() {
           <Route path="about_us" element={<EmployerHome />} />
           <Route path="pricing" element={<EmployerHome />} />
         </Route>
+         {/* candidate flow */}
+        <Route path="/candidate" element={<CandidateLayout />} >
+           <Route index element={<CandidateHome/>}/>
+           <Route path="FindJobs" element={<CandidateHome/>} />
 
-        <Route path="/candidate" element={<CandidateHome />} />
+          <Route path="/candidate/companies">
+            <Route index element={<CompanyPage />} />
+            <Route
+              path="companyprofile/:companyId"
+              element={<CompanyDetails />}
+            />
+          </Route>
+
+          <Route path="about_us" element={<CandidateHome />} />
+
+          <Route path="pricing" element={<CandidateHome />} />
+        </Route>
       </Routes>
     </>
   );
