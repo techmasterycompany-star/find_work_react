@@ -10,6 +10,7 @@ import Landing from "../modules/public/pages/Landing";
 import CompanyPage from "../modules/employer/pages/CompanyPage";
 import CompanyDetails from "../modules/employer/pages/CompanyDetails";
 import CandidateLayout from "../layouts/CandidateLayout";
+import AboutUs from "../modules/public/pages/AboutUs";
 
 export function AppRoutes() {
   return (
@@ -55,7 +56,7 @@ export function AppRoutes() {
             />
           </Route>
 
-          <Route path="about_us" element={<CandidateHome />} />
+          <Route path="about_us" element={<AboutUs />} />
 
           <Route path="pricing" element={<CandidateHome />} />
         </Route>
