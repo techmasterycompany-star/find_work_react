@@ -1,4 +1,4 @@
-import PublicHeader from "../components/PublicHeader";
+import Navbar from "../../../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import FeaturedJobsSection from "../components/FeaturedJobsSection";
 import ProfileCtaBanner from "../components/ProfileCtaBanner";
@@ -13,7 +13,7 @@ import Footer from "../components/footer";
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
-      <PublicHeader />
+      <Navbar />
       <HeroSection />
       <FeaturedJobsSection />
       <ProfileCtaBanner />

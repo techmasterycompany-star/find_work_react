@@ -1,169 +1,186 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
+import { HiOutlineLanguage } from "react-icons/hi2";
+import { useAuth } from "../context/AuthContext";
+import { logout as logoutRequest } from "../modules/auth/services/authApi";
 
-// Change this path to your actual Job4U logo
-import logo from "../assets/Brand Logo.png";
-
-const NAV_LINKS = [
-  { label: "Home", to: "/" },
-  { label: "Find Jobs", to: "/jobs" },
-  { label: "Companies", to: "/companies" },
-  { label: "About Us", to: "/about" },
-  { label: "Pricing", to: "/pricing" },
-];
+const NAV_CONFIG = {
+  guest: {
+    links: [
+      { label: "Home", to: "/", end: true },
+      { label: "Find Jobs", to: "/jobs" },
+      { label: "Companies", to: "/companies" },
+      { label: "About Us", to: "/about" },
+      { label: "Pricing", to: "/pricing" },
+    ],
+  },
+  employer: {
+    links: [
+      { label: "Home", to: "/employer", end: true },
+      { label: "Post a Job", to: "/employer/posting" },
+      { label: "Candidates", to: "/employer/candidatespage" },
+      { label: "Companies", to: "/employer/companies" },
+      { label: "About Us", to: "/employer/about_us" },
+      { label: "Pricing", to: "/employer/pricing" },
+    ],
+    menu: [
+      { label: "Company Profile", to: "/employer" },
+      { label: "Analytics", to: "/employer/analytics" },
+      { label: "My Jobs", to: "/employer/posting" },
+      { label: "Settings", to: "/employer/settings" },
+    ],
+  },
+  candidate: {
+    links: [{ label: "Home", to: "/candidate", end: true }],
+    menu: [
+      { label: "My Profile", to: "/candidate" },
+      { label: "Applications", to: "/candidate/applications" },
+      { label: "Saved Jobs", to: "/candidate/saved" },
+      { label: "Settings", to: "/candidate/settings" },
+    ],
+  },
+};
 
 export default function Navbar() {
+  const { isAuthenticated, role, user, clearSession } = useAuth();
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const config = isAuthenticated
+    ? (NAV_CONFIG[role] ?? NAV_CONFIG.guest)
+    : NAV_CONFIG.guest;
+  const displayName =
+    user?.companyName ||
+    user?.name ||
+    (role === "employer" ? "Employer" : "Candidate");
+
+  const handleLogout = async () => {
+    setMenuOpen(false);
+    try {
+      await logoutRequest();
+    } catch {
+    } finally {
+      clearSession();
+      navigate("/");
+    }
+  };
+
   return (
-    <header className="w-full h-[88px] bg-white border border-gray-200 rounded-lg">
-      <div className="w-full h-full px-[80px] flex items-center justify-between">
+    <header className="flex items-center justify-between w-full h-22 px-20 py-5 border-b border-zinc-200 bg-white">
+      <Link to="/" className="flex items-center gap-1 font-bold text-zinc-900">
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-violet-600 text-white text-sm">
+          J4
+        </span>
+        Job<span className="text-violet-600">4U</span>
+      </Link>
 
-        {/* ================= LOGO ================= */}
-        <NavLink to="/" className="shrink-0">
-          <img
-            src={logo}
-            alt="Job4U"
-            className="w-[72px] h-[48px] object-contain"
-          />
-        </NavLink>
-
-        {/* ================= NAVIGATION TABS ================= */}
-        <nav className="w-[465px] h-[40px] flex items-center justify-between">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                `text-[14px] font-medium transition-colors ${
-                  isActive
-                    ? "text-[#6D3DF5]"
-                    : "text-gray-800 hover:text-[#6D3DF5]"
-                }`
-              }
-            >
-              {link.label}
+      <nav>
+        <ul className="flex items-center gap-1">
+          {config.links.map((link) => (
+            <NavLink key={link.to} to={link.to} end={link.end}>
+              {({ isActive }) => (
+                <li
+                  className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                    isActive
+                      ? "text-violet-600"
+                      : "text-zinc-700 hover:bg-zinc-100"
+                  }`}
+                >
+                  {link.label}
+                </li>
+              )}
             </NavLink>
           ))}
-        </nav>
+        </ul>
+      </nav>
 
-        {/* ================= RIGHT SIDE ================= */}
-        <div className="w-[366px] h-[48px] flex items-center justify-end gap-[20px]">
-
-          {/* Dark Mode */}
+      {!isAuthenticated ? (
+        <Link
+          to="/auth/login"
+          className="px-4 py-2 rounded-lg bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700"
+        >
+          Log In
+        </Link>
+      ) : (
+        <div className="flex items-center gap-1">
           <button
             type="button"
             aria-label="Toggle dark mode"
-            className="w-[24px] h-[24px] flex items-center justify-center text-gray-800"
+            className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="w-[20px] h-[20px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            >
-              <path
-                d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <HiOutlineMoon className="h-5 w-5" />
           </button>
-
-          {/* Language */}
           <button
             type="button"
-            aria-label="Change language"
-            className="w-[24px] h-[24px] flex items-center justify-center text-gray-800"
+            aria-label="Language"
+            className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="w-[20px] h-[20px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-            >
-              <rect
-                x="5"
-                y="5"
-                width="14"
-                height="14"
-                rx="2"
-              />
-              <path
-                d="M8 9h8M8 12h8M8 15h5"
-                strokeLinecap="round"
-              />
-            </svg>
+            <HiOutlineLanguage className="h-5 w-5" />
           </button>
-
-          {/* Notification */}
           <button
             type="button"
             aria-label="Notifications"
-            className="w-[24px] h-[24px] flex items-center justify-center text-gray-800"
+            className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
           >
-            <svg
-              viewBox="0 0 24 24"
-              className="w-[21px] h-[21px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <path
-                d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M10 21h4"
-                strokeLinecap="round"
-              />
-            </svg>
+            <HiOutlineBell className="h-5 w-5" />
           </button>
 
-          {/* Divider */}
-          <div className="h-[32px] w-px bg-gray-300 mx-[2px]" />
+          <span className="px-3 text-sm text-zinc-500 border-l border-zinc-200 ml-2">
+            {role === "employer" ? "Employer" : "Candidate"}
+          </span>
 
-          {/* Employer */}
-          <NavLink
-            to="/employer"
-            className="text-[14px] font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap"
-          >
-            Employer
-          </NavLink>
-
-          {/* Login */}
-          <NavLink
-            to="/auth/login"
-            className="w-[111px] h-[40px] rounded-[12px] bg-[#6D3DF5] text-white text-[14px] font-semibold flex items-center justify-center gap-[8px] hover:bg-[#5d31dc] transition-colors"
-          >
-            <span>Log In</span>
-
-            {/* Login icon */}
-            <svg
-              viewBox="0 0 24 24"
-              className="w-[18px] h-[18px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="flex items-center gap-2 pl-3 pr-2 py-2 rounded-xl hover:bg-zinc-100"
             >
-              <path
-                d="M10 17l5-5-5-5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M15 12H3"
-                strokeLinecap="round"
-              />
-              <path
-                d="M21 3v18"
-                strokeLinecap="round"
-              />
-            </svg>
-          </NavLink>
+              <span className="h-8 w-8 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-semibold">
+                {displayName[0]}
+              </span>
+              <span className="text-sm font-medium text-zinc-800">
+                {displayName}
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                className={`h-4 w-4 text-zinc-400 transition-transform ${menuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  d="m6 9 6 6 6-6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
 
+            {menuOpen && (
+              <div className="absolute right-0 top-14 w-52 rounded-xl border border-zinc-200 bg-white shadow-lg overflow-hidden z-50">
+                {config.menu.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-3 text-sm text-zinc-700 hover:bg-zinc-50 border-b border-zinc-100"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-3 text-sm font-semibold text-red-600 hover:bg-zinc-50"
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
