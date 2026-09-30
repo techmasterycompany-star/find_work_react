@@ -11,7 +11,7 @@ import Landing from "../modules/public/pages/Landing";
 import CompanyPage from "../modules/employer/pages/CompanyPage";
 import CompanyDetails from "../modules/employer/pages/CompanyDetails";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
-
+import EmployerPricingPage from "../modules/employer/pages/PricingPage";
 
 export function AppRoutes() {
   return (
@@ -49,7 +49,7 @@ export function AppRoutes() {
             </Route>
 
             <Route path="about_us" element={<EmployerHome />} />
-            <Route path="pricing" element={<EmployerHome />} />
+            <Route path="pricing" element={<EmployerPricingPage />} />
           </Route>
 
           <Route path="/candidate" element={<CandidateLayout />}>
