@@ -1,4 +1,3 @@
-// import { UserProvider } from "../../../context/UsersContext";
 import Activity from "../components/Activity";
 import Banner from "../components/Banner";
 import Hero from "../components/HeroSec";
@@ -7,9 +6,6 @@ import Marketing from "../components/Marketing";
 import Spotlight from "../components/Spotlight";
 import TopCandidates from "../components/TopCandidates";
 
-
-
-
 export default function EmployerHome() {
   return (
     <>
@@ -17,10 +13,10 @@ export default function EmployerHome() {
         <Hero />
         <JobPosting />
         <Marketing />
-        <TopCandidates/>
+        <TopCandidates />
         <Activity />
-        <Spotlight/>
-        <Banner/>
+        <Spotlight />
+        <Banner />
       </div>
     </>
   );

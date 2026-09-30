@@ -1,5 +1,4 @@
 import background from "../../../assets/background.jpg";
-// import photo6 from "../../../assets/photo6.jpg";
 import CandidateOverview from "./CandidateOverview";
 import Certificate from "./Certificate";
 import ReferenceCard from "./ReferenceCard";
@@ -17,7 +16,6 @@ export default function CandidateProfile() {
     return c.id == candidateId
 
   });
-  // console.log(page);
   
   return (
     <>

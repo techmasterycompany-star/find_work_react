@@ -90,7 +90,7 @@ export default function TestimonialsSection() {
         <Pagination current={page} total={10} onChange={setPage} showArrows />
       </div>
 
-              <div className="mt-16 relative overflow-hidden rounded-3xl bg-purple-950 px-16 py-14 text-center text-white">
+        <div className="mt-16 relative overflow-hidden rounded-3xl bg-purple-950 px-16 py-14 text-center text-white">
           <div className="pointer-events-none absolute -left-10 -bottom-16 h-52 w-52 rounded-full bg-violet-800/40" />
           <div className="pointer-events-none absolute -right-10 top-1/2 -translate-y-1/2 h-56 w-56 rounded-full bg-violet-800/40" />
 

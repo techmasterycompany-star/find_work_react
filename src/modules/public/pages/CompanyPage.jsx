@@ -1,7 +1,7 @@
 import HeaderSec from "../../../components/HeaderSec";
 import company from "../../../assets/company.png";
-import Input from "../components/input";
-import CompaniesMenu from "../components/CompaniesMenu";
+import Input from "../../employer/components/input";
+import CompaniesMenu from "../../employer/components/CompaniesMenu";
 import BreadCrump from "../../../components/BreadCrump";
 export default function CompanyPage() {
   return (
@@ -16,7 +16,11 @@ export default function CompanyPage() {
         spanend={25}
         img={company}
       >
-       <Input btntext="Find Company" firstplaceholder="Search Job title, keywords or Company" secondplaceholder="location or “remote”"/>  
+        <Input
+          btntext="Find Company"
+          firstplaceholder="Search Job title, keywords or Company"
+          secondplaceholder="location or “remote”"
+        />
       </HeaderSec>
       <CompaniesMenu />
     </div>

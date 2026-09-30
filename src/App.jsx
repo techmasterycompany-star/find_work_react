@@ -22,17 +22,23 @@ function App() {
         <FilterProvider>
           <CompanyProvider>
             <EmployerProvider>
-             <AuthProvider>
-            <AppRoutes />
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/auth/login" element={<Login />} />
-              <Route path="/auth/role-select" element={<RoleSelect />} />
-              <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
-              <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
-              <Route path="/auth/congratulations" element={<Congrats />} />
-            </Routes>
-            </AuthProvider>
+              <AuthProvider>
+                <AppRoutes />
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/auth/login" element={<Login />} />
+                  <Route path="/auth/role-select" element={<RoleSelect />} />
+                  <Route
+                    path="/auth/signup/employer"
+                    element={<EmployerSignUp />}
+                  />
+                  <Route
+                    path="/auth/signup/candidate"
+                    element={<CandidateSignUp />}
+                  />
+                  <Route path="/auth/congratulations" element={<Congrats />} />
+                </Routes>
+              </AuthProvider>
             </EmployerProvider>
           </CompanyProvider>
         </FilterProvider>

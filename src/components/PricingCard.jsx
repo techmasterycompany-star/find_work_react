@@ -8,7 +8,7 @@ export default function PricingCard({
   selected,
   children,
   tag,
-  date
+  date,
 }) {
   const icon = () => {
     return (
@@ -35,24 +35,42 @@ export default function PricingCard({
     <div
       className={`w-full h-[500px] py-10 px-6 mb-8 rounded-md relative ${selected ? `bg-primary translate-y-[-30px] h-[540px] shadow-2xl shadow-[#C4B5FD]` : "bg-[#EEE8F6]"}`}
     >
-        {selected ? icon() : ""}
-      <div className={`pb-8 border-b-1  ${selected ? " border-b-white":"border-b-gray-400"}`}>
+      {selected ? icon() : ""}
+      <div
+        className={`pb-8 border-b-1  ${selected ? " border-b-white" : "border-b-gray-400"}`}
+      >
         <span className="h-8 w-fit py-1 px-2 rounded-[4px] text-[14px] flex items-center justify-center font-semibold text-primary bg-[#DDD6FE] mb-3">
           {plantype}
         </span>
-        <p className={`text-sm font-medium ${selected ? "text-white" : "text-text-secondary" } `}>{description}</p>
+        <p
+          className={`text-sm font-medium ${selected ? "text-white" : "text-text-secondary"} `}
+        >
+          {description}
+        </p>
       </div>
-      <div className={`py-8 border-b-1 mb-8 ${selected ? " border-b-white":"border-b-gray-400"}`}>
+      <div
+        className={`py-8 border-b-1 mb-8 ${selected ? " border-b-white" : "border-b-gray-400"}`}
+      >
         <div className="mb-5 flex gap-2 items-baseline">
-          <p className={`font-bold text-3xl ${selected ? "text-white" : "text-text-primary" }`}>{price}</p>
-          <span className={`font-medium text-md ${selected ? "text-white" : "text-text-secondary" }`}>
-             {date}
+          <p
+            className={`font-bold text-3xl ${selected ? "text-white" : "text-text-primary"}`}
+          >
+            {price}
+          </p>
+          <span
+            className={`font-medium text-md ${selected ? "text-white" : "text-text-secondary"}`}
+          >
+            {date}
           </span>
         </div>
         <span className="text=[12px] font-normal text-[#E4E4E7] block mb-3">
           {tag}
         </span>
-        <button className={`flex items-center justify-center w-full h-10 py-2 px-4 font-bold border-0 rounded-2sm cursor-pointer text-md ${selected ? "bg-section-2 text-text-primary" : "bg-primary text-white"}`}>{btntext}</button>
+        <button
+          className={`flex items-center justify-center w-full h-10 py-2 px-4 font-bold border-0 rounded-2sm cursor-pointer text-md ${selected ? "bg-section-2 text-text-primary" : "bg-primary text-white"}`}
+        >
+          {btntext}
+        </button>
       </div>
       <div>{children}</div>
     </div>

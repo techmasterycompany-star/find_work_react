@@ -9,7 +9,6 @@ import photo8 from "../assets/photo8.jpg";
 
 import { createContext, useState } from "react";
 import Certificate from "../modules/employer/components/Certificate";
-
 export let candidatedata = [
   {
     id: 1,
@@ -120,7 +119,7 @@ export let candidatedata = [
     certificatejobgained: "Senior Full-Stack Developer",
     comment:
       "Marcous consistently delivers complex features and works effectively across both frontend and backend teams.",
-      companycomment:
+    companycomment:
       "When I applied for a position at tech, I knew I was about to experience one of the most challenging job interviews of my career. But what I didn’t expect was the incredible combination of professionalism, creativity, and team culture throughout the process.",
     commentperson: "Omar Nabil",
     commentpersonjob: "Principal Software Engineer",

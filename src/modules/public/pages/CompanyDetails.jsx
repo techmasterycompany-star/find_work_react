@@ -4,16 +4,16 @@ import { CompanyContext } from "../../../context/CompanyContext";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import company from "../../../assets/company.png";
-import CompanyContentInfo from "../components/CompanyContentInfo";
-import CandidateOverview from "../components/CandidateOverview";
+import CompanyContentInfo from "../../employer/components/CompanyContentInfo";
+import CandidateOverview from "../../employer/components/CandidateOverview";
 import { RiFacebookFill } from "react-icons/ri";
 import { RiTwitterFill } from "react-icons/ri";
 import { RiLinkedinFill } from "react-icons/ri";
 import { RiGithubFill } from "react-icons/ri";
-import CompanyCommentsCard from "../components/CompanyComments";
-import JobCard from "../components/JobCard";
-import EmployerCard from "../components/EmployerCard";
-import CompanyCard from "../components/CompaniesCard";
+import CompanyCommentsCard from "../../employer/components/CompanyComments";
+import JobCard from "../../employer/components/JobCard";
+import EmployerCard from "../../employer/components/EmployerCard";
+import CompanyCard from "../../employer/components/CompaniesCard";
 
 export default function CompanyDetails() {
   const { companyData } = useContext(CompanyContext);
@@ -250,7 +250,7 @@ export default function CompanyDetails() {
         </section>
         {/* overview */}
         <section className="w-[1380px]  ml-20 bg-surface mb-20">
-              <div className="flex-between">
+          <div className="flex-between">
             <h2 className="text-[32px] font-bold text-text-primary mb-8">
               Overview
             </h2>
@@ -278,7 +278,7 @@ export default function CompanyDetails() {
         </section>
         {/* open job */}
         <section className="w-[1380px]  ml-20 bg-surface mb-20">
-               <div className="flex-between">
+          <div className="flex-between">
             <h2 className="text-[32px] font-bold text-text-primary mb-8">
               Open Jobs
             </h2>
@@ -337,9 +337,9 @@ export default function CompanyDetails() {
 
         {/* Similar Companies  */}
         <section className="w-[1380px]  ml-20 bg-surface mb-20">
-                  <div className="flex-between">
+          <div className="flex-between">
             <h2 className="text-[32px] font-bold text-text-primary mb-8">
-              Similar Companies 
+              Similar Companies
             </h2>
             <div>
               <button className="flex-gap8 text-primary font-bold text-sm cursor-pointer hover:underline">
