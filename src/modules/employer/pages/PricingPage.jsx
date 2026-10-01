@@ -1,6 +1,6 @@
 import Pricing from "../../../components/Pricing";
 
-export default function EmployerPricingPage() {
+export default function PricingPage() {
   return (
     <Pricing
       firsttitle="Find the Perfect Plan for"

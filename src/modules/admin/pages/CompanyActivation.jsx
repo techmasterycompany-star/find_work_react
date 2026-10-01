@@ -1,8 +1,9 @@
+import { useState, useMemo } from "react";
 import StatsCards from "../components/StatsCards";
 import ActivationFilters from "../components/ActivationFilters";
 import CompaniesTable from "../components/CompaniesTable";
 import CompanyDetailsModal from "../components/CompanyDetailsModal";
-import { initialCompanies, PAGE_SIZE } from "../services/companyActivationMock";
+import { initialCompanies, PAGE_SIZE } from "../services/mockData";
 
 export default function CompanyActivation() {
   const [companies, setCompanies] = useState(initialCompanies);
@@ -22,7 +23,11 @@ export default function CompanyActivation() {
     };
   }, [companies]);
 
-  const counts = { all: stats.total, activated: stats.activated, rejected: stats.rejected };
+  const counts = {
+    all: stats.total,
+    activated: stats.activated,
+    rejected: stats.rejected,
+  };
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -30,7 +35,7 @@ export default function CompanyActivation() {
       (c) =>
         (tab === "all" || c.status === tab) &&
         (!q || c.name.toLowerCase().includes(q)) &&
-        (!date || c.submittedAt === date)
+        (!date || c.submittedAt === date),
     );
   }, [companies, tab, search, date]);
 
@@ -44,7 +49,9 @@ export default function CompanyActivation() {
 
   const updateStatus = (id, status) => {
     // TODO: replace with API call (axios / react-query mutation)
-    setCompanies((prev) => prev.map((c) => (c.id === id ? { ...c, status } : c)));
+    setCompanies((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, status } : c)),
+    );
     setSelected(null);
   };
 
