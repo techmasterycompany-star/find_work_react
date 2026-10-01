@@ -13,7 +13,7 @@ import Footer from "../components/footer";
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
-      <PublicHeader />
+      {/* <PublicHeader /> */}
       <HeroSection />
       <FeaturedJobsSection />
       <ProfileCtaBanner />

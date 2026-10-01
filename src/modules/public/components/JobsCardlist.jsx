@@ -1,31 +1,45 @@
 import { useContext } from "react";
 import { filtercontext } from "../../../context/filterstates";
-import CompanyCard from "./CompaniesCard";
-import {CompanyContext} from "../../../context/CompanyContext"
+import JobCard from "../../employer/components/JobCard";
+import { jobcontext } from "../../../context/JobContext";
+import FindJobCard from "./FindJobCard";
 
 
 
-export default function CompanyCardList() {
-  const {companyData} = useContext(CompanyContext);
-  const { companyChecked, radioChecked } = useContext(filtercontext);
+export default function JobsCardlist() {
+  const { jobdata } = useContext(jobcontext);
+  const { jobChecked, radioChecked } = useContext(filtercontext);
 
-  let companylistfull = companyData.map((company) => {
+  let joblistfull = jobdata.map((job) => {
     return {
-      data: company,
-      card: <CompanyCard key={company.id} company={company} />,
+      data: job,
+      card: <FindJobCard key={job.id} job={job} />,
     };
   });
 
-let filter = companylistfull;
+let filter = joblistfull;
 
-if (companyChecked.categorey.length > 0) {
+if (jobChecked.categorey.length > 0) {
   filter = filter.filter((f) => {
-    return companyChecked.categorey.includes(f.data.categorey);
+    return jobChecked.categorey.includes(f.data.categorey);
   });
 }
-if (companyChecked.size.length > 0) {
+
+if (jobChecked.date.length > 0) {
   filter = filter.filter((f) => {
-    return companyChecked.size.includes(f.data.size);
+    return jobChecked.date.includes(f.data.publication);
+  });
+}
+
+if (jobChecked.education.length > 0) {
+  filter = filter.filter((f) => {
+    return jobChecked.education.includes(f.data.education);
+  });
+}
+
+if (jobChecked.jobtype.length > 0) {
+  filter = filter.filter((f) => {
+    return jobChecked.jobtype.includes(f.data.type);
   });
 }
 
@@ -35,6 +49,11 @@ if (radioChecked) {
   });
 }
 
+if (jobChecked.mode.length > 0) {
+  filter = filter.filter((f) => {
+    return jobChecked.mode.includes(f.data.location);
+  });
+}
 
 
 let filtermap = filter.map((m) => {

@@ -118,7 +118,7 @@ export default function CandidateNavBarLinks() {
                        <Link>Analytics</Link>
                     </div>
                      <div className="h-14 w-full pl-3 flex items-center border-b-1  border-b-border1 bg-surface hover:text-primary hover:font-semibold">
-                       <Link>Saved Jobs</Link>
+                       <Link to={"/candidate/savedjobs"}>Saved Jobs</Link>
                     </div>
                      <div className="h-14 w-full pl-3 flex items-center border-b-1 border-b-border1 bg-surface  hover:text-primary hover:font-semibold">
                        <Link>Settings</Link>
