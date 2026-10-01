@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import AdminLayout from "./layouts/AdminLayout";
 import Overview from "./modules/admin/pages/AdminOverview";
 import UserManagement from "./modules/admin/pages/UserManagement";
+import CompanyActivation from "../modules/admin/pages/CompanyActivation";
 
 export default function AdminApp() {
   return (
@@ -12,6 +13,7 @@ export default function AdminApp() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Overview />} />
             <Route path="users" element={<UserManagement />} />
+            <Route path="company-activation" element={<CompanyActivation />} />
           </Route>
         </Routes>
       </AuthProvider>
