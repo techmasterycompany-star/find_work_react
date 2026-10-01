@@ -20,8 +20,8 @@ const NAV_CONFIG = {
       { label: "Home", to: "/employer", end: true },
       { label: "Post a Job", to: "/employer/posting" },
       { label: "Candidates", to: "/employer/candidatespage" },
-      { label: "Companies", to: "/employer/companies" },
-      { label: "About Us", to: "/employer/about_us" },
+      { label: "Companies", to: "/companies" },
+      { label: "About Us", to: "/about" },
       { label: "Pricing", to: "/employer/pricing" },
     ],
     menu: [
@@ -32,7 +32,13 @@ const NAV_CONFIG = {
     ],
   },
   candidate: {
-    links: [{ label: "Home", to: "/candidate", end: true }],
+    links: [
+      { label: "Home", to: "/candidate", end: true },
+      { label: "Find Jobs", to: "/candidate/find-jobs" },
+      { label: "Companies", to: "/companies" },
+      { label: "About Us", to: "/about" },
+      { label: "Pricing", to: "/candidate/pricing" },
+    ],
     menu: [
       { label: "My Profile", to: "/candidate" },
       { label: "Applications", to: "/candidate/applications" },
@@ -47,19 +53,15 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const config = isAuthenticated
-    ? (NAV_CONFIG[role] ?? NAV_CONFIG.guest)
-    : NAV_CONFIG.guest;
-  const displayName =
-    user?.companyName ||
-    user?.name ||
-    (role === "employer" ? "Employer" : "Candidate");
+  const config = isAuthenticated ? NAV_CONFIG[role] ?? NAV_CONFIG.guest : NAV_CONFIG.guest;
+  const displayName = user?.companyName || user?.name || (role === "employer" ? "Employer" : "Candidate");
 
   const handleLogout = async () => {
     setMenuOpen(false);
     try {
       await logoutRequest();
     } catch {
+      // backend session invalidation failing shouldn't trap the user logged in locally
     } finally {
       clearSession();
       navigate("/");
@@ -69,9 +71,7 @@ export default function Navbar() {
   return (
     <header className="flex items-center justify-between w-full h-22 px-20 py-5 border-b border-zinc-200 bg-white">
       <Link to="/" className="flex items-center gap-1 font-bold text-zinc-900">
-        <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-violet-600 text-white text-sm">
-          J4
-        </span>
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-violet-600 text-white text-sm">J4</span>
         Job<span className="text-violet-600">4U</span>
       </Link>
 
@@ -82,9 +82,7 @@ export default function Navbar() {
               {({ isActive }) => (
                 <li
                   className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                    isActive
-                      ? "text-violet-600"
-                      : "text-zinc-700 hover:bg-zinc-100"
+                    isActive ? "text-violet-600" : "text-zinc-700 hover:bg-zinc-100"
                   }`}
                 >
                   {link.label}
@@ -104,25 +102,13 @@ export default function Navbar() {
         </Link>
       ) : (
         <div className="flex items-center gap-1">
-          <button
-            type="button"
-            aria-label="Toggle dark mode"
-            className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
-          >
+          <button type="button" aria-label="Toggle dark mode" className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100">
             <HiOutlineMoon className="h-5 w-5" />
           </button>
-          <button
-            type="button"
-            aria-label="Language"
-            className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
-          >
+          <button type="button" aria-label="Language" className="h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100">
             <HiOutlineLanguage className="h-5 w-5" />
           </button>
-          <button
-            type="button"
-            aria-label="Notifications"
-            className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
-          >
+          <button type="button" aria-label="Notifications" className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100">
             <HiOutlineBell className="h-5 w-5" />
           </button>
 
@@ -139,9 +125,7 @@ export default function Navbar() {
               <span className="h-8 w-8 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-semibold">
                 {displayName[0]}
               </span>
-              <span className="text-sm font-medium text-zinc-800">
-                {displayName}
-              </span>
+              <span className="text-sm font-medium text-zinc-800">{displayName}</span>
               <svg
                 viewBox="0 0 24 24"
                 className={`h-4 w-4 text-zinc-400 transition-transform ${menuOpen ? "rotate-180" : ""}`}
@@ -149,11 +133,7 @@ export default function Navbar() {
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <path
-                  d="m6 9 6 6 6-6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 

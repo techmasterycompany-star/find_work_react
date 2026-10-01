@@ -1,17 +1,28 @@
+import { Routes, Route } from "react-router-dom";
+
 import EmployerHome from "../modules/employer/pages/EmployerHome";
 import EmployerJobPostPage from "../modules/employer/pages/EmployerJobPostPage";
-import CandidateHome from "../modules/candidate/pages/CandidateHome";
-import EmployerLayout from "../layouts/EmployerLayout";
-import CandidateLayout from "../layouts/CandidateLayout";
-import { Routes, Route } from "react-router-dom";
+import EmployerPricingPage from "../modules/employer/pages/PricingPage";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
-import ScrollToTop from "../modules/employer/components/scrolltotop";
+import EmployerLayout from "../layouts/EmployerLayout";
+
+import CandidateHome from "../modules/candidate/pages/CandidateHome";
+import CandidateLayout from "../layouts/CandidateLayout";
+
 import Landing from "../modules/public/pages/Landing";
 import CompanyPage from "../modules/public/pages/CompanyPage";
 import CompanyDetails from "../modules/public/pages/CompanyDetails";
+import AboutUs from "../modules/public/pages/AboutUs";
+
+import Login from "../modules/auth/pages/Login";
+import RoleSelect from "../modules/auth/pages/RoleSelect";
+import EmployerSignUp from "../modules/auth/pages/employerSignUp";
+import CandidateSignUp from "../modules/auth/pages/candidateSignUp";
+import Congrats from "../modules/auth/pages/Congrats";
+
+import ScrollToTop from "../modules/employer/components/scrolltotop";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
-import EmployerPricingPage from "../modules/employer/pages/PricingPage";
 
 export function AppRoutes() {
   return (
@@ -29,33 +40,36 @@ export function AppRoutes() {
           }
         />
 
+        {/* Public, unauthenticated content */}
+        <Route path="/companies" element={<CompanyPage />} />
+        <Route
+          path="/companies/companyprofile/:companyId"
+          element={<CompanyDetails />}
+        />
+        <Route path="/about" element={<AboutUs />} />
+
+        {/* Auth flow */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/role-select" element={<RoleSelect />} />
+        <Route path="/auth/signup/employer" element={<EmployerSignUp />} />
+        <Route path="/auth/signup/candidate" element={<CandidateSignUp />} />
+        <Route path="/auth/congratulations" element={<Congrats />} />
+
         {/* Authenticated routes */}
         <Route element={<RequireAuth />}>
           {/* Employer flow */}
           <Route path="/employer" element={<EmployerLayout />}>
             <Route index element={<EmployerHome />} />
-
             <Route path="posting" element={<EmployerJobPostPage />} />
 
             <Route path="candidatespage">
               <Route index element={<CandidatesPage />} />
-
               <Route
                 path="candidateprofile/:candidateId"
                 element={<CandidateProfilePage />}
               />
             </Route>
-
-            <Route path="companies">
-              <Route index element={<CompanyPage />} />
-
-              <Route
-                path="companyprofile/:companyId"
-                element={<CompanyDetails />}
-              />
-            </Route>
-
-            <Route path="about_us" element={<EmployerHome />} />
 
             <Route path="pricing" element={<EmployerPricingPage />} />
           </Route>
@@ -63,20 +77,7 @@ export function AppRoutes() {
           {/* Candidate flow */}
           <Route path="/candidate" element={<CandidateLayout />}>
             <Route index element={<CandidateHome />} />
-
             <Route path="find-jobs" element={<CandidateHome />} />
-
-            <Route path="companies">
-              <Route index element={<CompanyPage />} />
-
-              <Route
-                path="companyprofile/:companyId"
-                element={<CompanyDetails />}
-              />
-            </Route>
-
-            <Route path="about_us" element={<CandidateHome />} />
-
             <Route path="pricing" element={<CandidateHome />} />
           </Route>
         </Route>
