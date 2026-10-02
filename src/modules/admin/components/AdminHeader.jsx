@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   HiOutlineMagnifyingGlass,
   HiOutlineMoon,
@@ -73,6 +74,7 @@ export default function AdminHeader() {
               {/* Notification */}
               <button
                 type="button"
+                onClick={() => navigate("/admin/notifications")}
                 className="relative flex h-[48px] w-[48px] items-center justify-center rounded-[12px] text-black transition hover:bg-[#F5F3FF]"
               >
                 <HiOutlineBell className="h-6 w-6" />

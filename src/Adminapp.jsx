@@ -4,6 +4,8 @@ import AdminLayout from "./layouts/AdminLayout";
 import Overview from "./modules/admin/pages/AdminOverview";
 import UserManagement from "./modules/admin/pages/UserManagement";
 import CompanyActivation from "./modules/admin/pages/Companyactivation";
+import Analytics from "./modules/admin/pages/Analytics";
+import AdminNotification from "./modules/admin/pages/AdminNotification";
 
 export default function AdminApp() {
   return (
@@ -14,6 +16,8 @@ export default function AdminApp() {
             <Route index element={<Overview />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="companies" element={<CompanyActivation />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="notifications" element={<AdminNotification />} />
           </Route>
         </Routes>
       </AuthProvider>
