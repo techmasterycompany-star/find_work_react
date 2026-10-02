@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import EmployerHome from "../modules/employer/pages/EmployerHome";
 import EmployerJobPostPage from "../modules/employer/pages/EmployerJobPostPage";
-import EmployerPricingPage from "../modules/employer/pages/PricingPage";
+import PricingPage from "../modules/employer/pages/Pricingpage";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
 import EmployerLayout from "../layouts/EmployerLayout";
@@ -20,6 +20,7 @@ import RoleSelect from "../modules/auth/pages/RoleSelect";
 import EmployerSignUp from "../modules/auth/pages/employerSignUp";
 import CandidateSignUp from "../modules/auth/pages/candidateSignUp";
 import Congrats from "../modules/auth/pages/Congrats";
+import PublicLayout from "../layouts/PublicLayout";
 
 import ScrollToTop from "../modules/employer/components/scrolltotop";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
@@ -41,12 +42,14 @@ export function AppRoutes() {
         />
 
         {/* Public, unauthenticated content */}
-        <Route path="/companies" element={<CompanyPage />} />
-        <Route
-          path="/companies/companyprofile/:companyId"
-          element={<CompanyDetails />}
-        />
-        <Route path="/about" element={<AboutUs />} />
+        <Route element={<PublicLayout />}>
+          <Route path="/companies" element={<CompanyPage />} />
+          <Route
+            path="/companies/companyprofile/:companyId"
+            element={<CompanyDetails />}
+          />
+          <Route path="/about" element={<AboutUs />} />
+        </Route>
 
         {/* Auth flow */}
         <Route path="/login" element={<Login />} />
@@ -71,14 +74,14 @@ export function AppRoutes() {
               />
             </Route>
 
-            <Route path="pricing" element={<EmployerPricingPage />} />
+            <Route path="pricing" element={<PricingPage />} />
           </Route>
 
           {/* Candidate flow */}
           <Route path="/candidate" element={<CandidateLayout />}>
             <Route index element={<CandidateHome />} />
             <Route path="find-jobs" element={<CandidateHome />} />
-            <Route path="pricing" element={<CandidateHome />} />
+            <Route path="pricing" element={<PricingPage />} />
           </Route>
         </Route>
       </Routes>
