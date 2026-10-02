@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import figma from "../assets/figma.png";
+import { useState } from "react";
 let jobdata = [
   {
     id: "1",
@@ -19,6 +20,9 @@ let jobdata = [
     categorey: "UI/UX Designer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:false,
+    active:true,
+    isExpired:false,
   },
   {
     id: "2",
@@ -38,6 +42,9 @@ let jobdata = [
     categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:true,
+    active:false,
+    isExpired:true,
   },
   {
     id: "3",
@@ -57,6 +64,10 @@ let jobdata = [
     categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:false,
+    active:false,
+    isExpired:true,
+
   },
   {
     id: "4",
@@ -76,6 +87,10 @@ let jobdata = [
     categorey: "UI/UX Designer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:true,
+    active:true,
+    isExpired:true,
+
   },
   {
     id: "5",
@@ -95,6 +110,8 @@ let jobdata = [
     categorey: "UI/UX Designer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:false,
+    active:true
   },
   {
     id: "6",
@@ -114,13 +131,34 @@ let jobdata = [
     categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
     isSaved:false,
+    apply:true,
+    active:false,
+    isExpired:true,
   },
 ];
 
+
+
+
 export const jobcontext = createContext({});
 
+
+
 export function JobProvider({ children }) {
+  const [jobs, setJobs] = useState(jobdata);
+
+  
+const handleSave = (id) => {
+  setJobs((jobs) =>
+    jobs.map((job) =>
+      job.id === id
+  ? { ...job, isSaved: true }
+  : job
+)
+);
+};
+
   return (
-    <jobcontext.Provider value={{ jobdata }}>{children}</jobcontext.Provider>
+    <jobcontext.Provider value={{ jobs,jobdata,handleSave }}>{children}</jobcontext.Provider>
   );
 }

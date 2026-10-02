@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { filtercontext } from "../../../context/filterstates";
-import JobCard from "../../employer/components/JobCard";
 import { jobcontext } from "../../../context/JobContext";
 import FindJobCard from "./FindJobCard";
 
@@ -10,10 +9,14 @@ export default function JobsCardlist() {
   const { jobdata } = useContext(jobcontext);
   const { jobChecked, radioChecked } = useContext(filtercontext);
 
+
+  const { handleSave } = useContext(jobcontext);
+
+ 
   let joblistfull = jobdata.map((job) => {
     return {
       data: job,
-      card: <FindJobCard key={job.id} job={job} />,
+      card: <FindJobCard key={job.id} job={job} onSave={handleSave} />,
     };
   });
 
