@@ -19,7 +19,9 @@ export default function AdminHeader() {
     location.pathname === "/admin/users"
       ? "User Management"
       : location.pathname === "/admin"
-        ? "Overview"
+        ? "Overview" 
+        : location.pathname === "/admin/jobs"
+        ? "Job Management"
         : "Admin Dashboard";
 
   const name = user?.name || "Ahmed Ibrahim";
@@ -34,7 +36,7 @@ export default function AdminHeader() {
             Welcome back, {name.split(" ")[0]}
           </p>
 
-          <h1 className="text-[32px] font-bold leading-[39px] text-[#27272A]">
+          <h1 className="text-[32px] font-bold leading-[39px] text-[#27272A] w-[300px]">
             {pageTitle}
           </h1>
         </div>
