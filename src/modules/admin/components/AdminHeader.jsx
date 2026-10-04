@@ -14,6 +14,8 @@ export default function AdminHeader() {
   const [open, setOpen] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
+
 
   const pageTitle =
     location.pathname === "/admin/users"

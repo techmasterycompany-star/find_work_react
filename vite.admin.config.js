@@ -4,13 +4,18 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+
   server: {
     port: 3001,
     open: "/admin.html",
   },
+
   build: {
     rollupOptions: {
-      input: "admin.html",
+      input: {
+        main: "index.html",
+        admin: "admin.html",
+      },
     },
   },
 });
