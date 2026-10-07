@@ -11,7 +11,7 @@ export default function JobCard() {
     return f.id;
   });
 
-  let job = jobdata.map((j) => {
+  let job = jobdata.slice(0,3).map((j) => {
     return (
       <div className="w-full bg-card-2 p-6 rounded-2sm border-1 border-border1">
         <div className="title flex-between mb-3">

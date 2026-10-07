@@ -24,6 +24,8 @@ import PublicLayout from "../layouts/PublicLayout";
 
 import ScrollToTop from "../modules/employer/components/scrolltotop";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
+import FindJobs from "../modules/public/pages/FindJobs";
+import SavedJobs from "../modules/candidate/pages/SavedJobs";
 
 export function AppRoutes() {
   return (
@@ -49,6 +51,7 @@ export function AppRoutes() {
             element={<CompanyDetails />}
           />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/find-jobs" element={<FindJobs/>}/>
         </Route>
 
         {/* Auth flow */}
@@ -80,8 +83,9 @@ export function AppRoutes() {
           {/* Candidate flow */}
           <Route path="/candidate" element={<CandidateLayout />}>
             <Route index element={<CandidateHome />} />
-            <Route path="find-jobs" element={<CandidateHome />} />
+            <Route path="find-jobs" element={<FindJobs />} />
             <Route path="pricing" element={<PricingPage />} />
+            <Route path="saved" element={<SavedJobs />}/>
           </Route>
         </Route>
       </Routes>
