@@ -1,47 +1,49 @@
-import DateSelector from "../components/DateSelector";
-import StatCard from "../components/StatCard";
-import UserGrowth from "../components/UserGrowth";
-import RecentActivities from "../components/RecentActivities";
-import TopLocations from "../components/TopLocations";
-import JobsByCategory from "../components/JobsByCategory";
+// =====================================================================
+// AdminOverview — stat cards now use the unified "correct" design
+// (matching StatsCards / JobStatsCards with the Notch button).
+// =====================================================================
+
+import DateSelector from '../components/DateSelector';
+import OverviewStats from '../components/OverviewStats';
+import UserGrowth from '../components/UserGrowth';
+import RecentActivities from '../components/RecentActivities';
+import TopLocations from '../components/TopLocations';
+import JobsByCategory from '../components/JobsByCategory';
+import { useAdminUsers, useAllJobs, useReviewJobs } from '../hooks/useAdminQueries';
+import { toCompanyRow } from '../services/adminAdapters';
 
 export default function AdminOverview() {
+  // ----- Data -----
+  const { data: users = [] } = useAdminUsers();
+  const { data: reviewJobs = [] } = useReviewJobs();
+  const { data: allJobs = [] } = useAllJobs();
+
+  // ----- Derived stats -----
+  const pendingEmployers = users
+    .filter((u) => u.role === 'employer')
+    .map(toCompanyRow)
+    .filter((c) => c.status === 'pending').length;
+
+  const stats = {
+    pendingEmployers,
+    pendingJobs: reviewJobs.length,
+    totalJobs: allJobs.length,
+    totalUsers: users.length,
+  };
+
   return (
-    <div className="flex w-full flex-col items-end gap-7">
+    <div className="flex w-full flex-col gap-7">
       {/* Date */}
-      <DateSelector />
+      <div className="flex justify-end">
+        <DateSelector />
+      </div>
 
       {/* ================= STATS ================= */}
-      <section className="flex w-full gap-6">
-        <StatCard
-          title="Activation Company"
-          value="38"
-          action="Review Account"
-          purple
-        />
-
-        <StatCard
-          title="Pending Jobs"
-          value="34"
-          action="Review Jobs Queue"
-        />
-
-        <StatCard
-          title="Total Jobs"
-          value="34"
-          percentage="8.1%"
-          subtitle="From last week"
-        />
-
-        <StatCard
-          title="Total User"
-          value="1,000"
-          percentage="8.1%"
-          subtitle="From last week"
-        />
-      </section>
+      <OverviewStats stats={stats} />
 
       {/* ================= ANALYTICS ================= */}
+      {/* Charts below still use mock data — see INTEGRATION_NOTES.md.
+          They need a dedicated /admin/analytics endpoint. */}
       <section className="flex w-full gap-6">
         <UserGrowth />
         <RecentActivities />
