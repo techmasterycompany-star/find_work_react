@@ -5,6 +5,7 @@ import EmployerJobPostPage from "../modules/employer/pages/EmployerJobPostPage";
 import PricingPage from "../modules/employer/pages/Pricingpage";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
+import EmployerNotifications from "../modules/employer/pages/EmployerNotifications";
 import EmployerLayout from "../layouts/EmployerLayout";
 
 import CandidateHome from "../modules/candidate/pages/CandidateHome";
@@ -24,6 +25,7 @@ import PublicLayout from "../layouts/PublicLayout";
 
 import ScrollToTop from "../modules/employer/components/scrolltotop";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
+import { RequireEmployer } from "./RequireEmployer";
 import FindJobs from "../modules/public/pages/FindJobs";
 import SavedJobs from "../modules/candidate/pages/SavedJobs";
 
@@ -51,7 +53,7 @@ export function AppRoutes() {
             element={<CompanyDetails />}
           />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/find-jobs" element={<FindJobs/>}/>
+          <Route path="/find-jobs" element={<FindJobs />} />
         </Route>
 
         {/* Auth flow */}
@@ -64,20 +66,23 @@ export function AppRoutes() {
 
         {/* Authenticated routes */}
         <Route element={<RequireAuth />}>
-          {/* Employer flow */}
-          <Route path="/employer" element={<EmployerLayout />}>
-            <Route index element={<EmployerHome />} />
-            <Route path="posting" element={<EmployerJobPostPage />} />
+          {/* Employer flow — guarded so candidates can't enter */}
+          <Route element={<RequireEmployer />}>
+            <Route path="/employer" element={<EmployerLayout />}>
+              <Route index element={<EmployerHome />} />
+              <Route path="posting" element={<EmployerJobPostPage />} />
 
-            <Route path="candidatespage">
-              <Route index element={<CandidatesPage />} />
-              <Route
-                path="candidateprofile/:candidateId"
-                element={<CandidateProfilePage />}
-              />
+              <Route path="candidatespage">
+                <Route index element={<CandidatesPage />} />
+                <Route
+                  path="candidateprofile/:candidateId"
+                  element={<CandidateProfilePage />}
+                />
+              </Route>
+
+              <Route path="pricing" element={<PricingPage />} />
+              <Route path="notifications" element={<EmployerNotifications />} />
             </Route>
-
-            <Route path="pricing" element={<PricingPage />} />
           </Route>
 
           {/* Candidate flow */}
@@ -85,7 +90,7 @@ export function AppRoutes() {
             <Route index element={<CandidateHome />} />
             <Route path="find-jobs" element={<FindJobs />} />
             <Route path="pricing" element={<PricingPage />} />
-            <Route path="saved" element={<SavedJobs />}/>
+            <Route path="saved" element={<SavedJobs />} />
           </Route>
         </Route>
       </Routes>

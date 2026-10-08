@@ -10,7 +10,7 @@ const INITIAL_DATA = {
   overview: "",
   responsibilities: "",
   qualifications: "",
-  skills: "",
+  technologies: [],
   currency: "USD",
   salaryMin: "",
   salaryMax: "",
@@ -27,9 +27,17 @@ const INITIAL_DATA = {
 
 const STEP_FIELDS = {
   1: ["jobTitle", "jobCategory", "experienceLevel", "jobType", "location"],
-  2: ["overview", "responsibilities", "qualifications", "skills"],
+  2: ["overview", "responsibilities", "qualifications", "technologies"],
   3: ["currency", "salaryMin", "salaryMax", "salaryPeriod"],
-  4: ["companyName", "logo", "companyWebsite", "industry", "companySize", "companyDescription", "companyCulture"],
+  4: [
+    "companyName",
+    "logo",
+    "companyWebsite",
+    "industry",
+    "companySize",
+    "companyDescription",
+    "companyCulture",
+  ],
 };
 
 export default function useJobPostFlow() {
@@ -47,10 +55,20 @@ export default function useJobPostFlow() {
     const nextErrors = {};
 
     (STEP_FIELDS[stepNumber] || []).forEach((field) => {
-      if (!formData[field]) nextErrors[field] = "Required";
+      const value = formData[field];
+      if (field === "technologies") {
+        if (!Array.isArray(value) || value.length === 0) {
+          nextErrors[field] = "Select at least one technology";
+        }
+      } else if (!value) {
+        nextErrors[field] = "Required";
+      }
     });
 
-    if (stepNumber === 3 && Number(formData.salaryMin) > Number(formData.salaryMax)) {
+    if (
+      stepNumber === 3 &&
+      Number(formData.salaryMin) > Number(formData.salaryMax)
+    ) {
       nextErrors.salaryMax = "Maximum salary must be greater than the minimum";
     }
 
@@ -66,16 +84,22 @@ export default function useJobPostFlow() {
 
   const goBack = () => setStep((current) => Math.max(current - 1, 1));
 
-  const publish = () => {
+  const validateAll = () => {
     for (let stepNumber = 1; stepNumber <= 4; stepNumber += 1) {
       if (!validateStep(stepNumber)) {
         setStep(stepNumber);
         return false;
       }
     }
-
-    setIsPublished(true);
     return true;
+  };
+
+  const publish = () => {
+    if (validateAll()) {
+      setIsPublished(true);
+      return true;
+    }
+    return false;
   };
 
   return {
@@ -86,6 +110,7 @@ export default function useJobPostFlow() {
     updateField,
     goNext,
     goBack,
+    validateAll,
     publish,
     setStep,
     setErrors,

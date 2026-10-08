@@ -92,11 +92,10 @@ export default function CandidateSignup() {
     if (step < 3) return goNext();
     submit(async (data) => {
       const payload = new FormData();
-      payload.append("role", "candidate");
-      Object.entries(data).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) payload.append(key, value);
-      });
-      await register(payload);
+      Object.entries(data).forEach(([key, value]) =>
+        payload.append(key, value),
+      );
+      await register("candidate", payload);
       navigate("/auth/congratulations");
     });
   };

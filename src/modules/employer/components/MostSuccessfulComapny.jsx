@@ -12,13 +12,13 @@ export default function MostSuccessfulComapny() {
       return parseInt(com.hiringSuccess, 10);
     }),
   );
-  // console.log(highsuccess);
+  
 
   let filteredhighsuccess = companyData.filter((f) => {
     return parseInt(f.hiringSuccess, 10) === highsuccess;
   });
 
-  // console.log(filteredhighsuccess);
+  
   let filter = filteredhighsuccess;
 
 if (companyChecked.categorey.length > 0) {

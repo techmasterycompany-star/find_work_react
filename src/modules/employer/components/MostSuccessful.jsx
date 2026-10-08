@@ -12,13 +12,11 @@ export default function MostSuccessful() {
       return parseInt(can.HiringSuccessRate, 10);
     }),
   );
-  // console.log(highsuccess);
 
   let filteredhighsuccess = candidatedata.filter((f) => {
     return parseInt(f.HiringSuccessRate, 10) === highsuccess;
   });
 
-  // console.log(filteredhighsuccess);
   let filter = filteredhighsuccess;
   
   if (inputskillvalue.skill) {

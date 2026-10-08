@@ -57,18 +57,7 @@ export default function EmployerSignup() {
   const handleNext = () => {
     if (step < 3) return goNext();
     submit(async (data) => {
-      await register({
-        name: data.companyName,
-        email: data.companyEmail,
-        password: data.password,
-        role: 'employer',
-        employerProfile: {
-          company_name: data.companyName,
-          industry: data.industry,
-          website: data.companyWebsite,
-          size: data.companySize,
-        },
-      });
+      await register('employer', data);
       navigate('/auth/congratulations');
     });
   };

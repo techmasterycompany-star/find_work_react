@@ -5,7 +5,7 @@ import { filtercontext } from "../../../context/filterstates";
 
 export default function TopRated() {
   const { candidatedata } = useContext(UserContext);
-  const { inputskillvalue, inputjobvalue,checked } = useContext(filtercontext);
+  const { inputskillvalue, inputjobvalue, checked } = useContext(filtercontext);
 
   const highestReviews = Math.max(
     ...candidatedata.map((rate) => {
@@ -21,12 +21,9 @@ export default function TopRated() {
 
   console.log(highestRates);
 
-  // console.log(highestReviews);
-
   const filteredRates = candidatedata.filter((r) => {
     return r.ratings === highestRates && r.reviews === highestReviews;
   });
-  // console.log(filteredRates);
 
   let filter = filteredRates;
 
@@ -52,31 +49,27 @@ export default function TopRated() {
     });
   }
 
-  if(checked.available.checked == true && checked.available.value){
-  filter = filter.filter((f)=>{
-     return f.available == checked.available.value
-  })
-}
+  if (checked.available.checked == true && checked.available.value) {
+    filter = filter.filter((f) => {
+      return f.available == checked.available.value;
+    });
+  }
 
-if(checked.exp.checked == true && checked.exp.value){
-  filter=filter.filter((f)=>{
-    if(checked.exp.value === "0-1 years"){
-      return f.exp == "0-1 years"
-
-    }else if(checked.exp.value === "1-3 years"){
-      return f.exp == "1-3 years"
-
-    }else if(checked.exp.value === "3-5 years"){
-      return f.exp == "3-5 years"
-
-    }else if(checked.exp.value === "5+ years"){
-      return f.exp == "5+ years"
-      
-    }else{
-      return f.exp 
-    }
-  })
-}
+  if (checked.exp.checked == true && checked.exp.value) {
+    filter = filter.filter((f) => {
+      if (checked.exp.value === "0-1 years") {
+        return f.exp == "0-1 years";
+      } else if (checked.exp.value === "1-3 years") {
+        return f.exp == "1-3 years";
+      } else if (checked.exp.value === "3-5 years") {
+        return f.exp == "3-5 years";
+      } else if (checked.exp.value === "5+ years") {
+        return f.exp == "5+ years";
+      } else {
+        return f.exp;
+      }
+    });
+  }
 
   let filtermap = filter.map((m) => {
     return <CandidatesCard key={m.id} candidate={m} />;

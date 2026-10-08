@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 export function RequireAuth() {
   const { isAuthenticated, isInitializing } = useAuth();
 
-  if (isInitializing) return null; // avoid a flash-redirect while the token is still being checked
+  if (isInitializing) return null; 
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" replace />;
 }

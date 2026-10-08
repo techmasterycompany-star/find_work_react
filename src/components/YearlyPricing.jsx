@@ -1,52 +1,65 @@
 import PricingCard from "./PricingCard";
 import PricingBenefits from "./PricingBenefits";
+import { toSubscriptionPlan } from "../modules/employer/services/employerAdapters";
 
-export default function YearlyPricing(){
-    return(
-          <section className="w-[1380px] ml-20 pb-[196px] flex gap-10">
-          <PricingCard
-            selected={false}
-              date={"/year"}
-            plantype="BASIC Plane"
-            description={
-              "Perfect for small teams and startups testing the waters"
-            }
-            price={"$0"}
-            btntext={"Get Started"}
-          >
-            <PricingBenefits text="3 Standard Job Posts" />
-            <PricingBenefits text="Standard Support" />
-            <PricingBenefits text="Priority Support" />
-          </PricingCard>
-          <PricingCard
-            selected={true}
-             date={"/year"}
-            plantype="Business Pro"
-            description={
-              "Perfect for small teams and startups testing the waters"
-            }
-            price={"$200"}
-            btntext={"Select Pro"}
-            tag={"Best choice"}
-          >
-            <PricingBenefits text="15 Featured Job Posts" selected={true}/>
-            <PricingBenefits text="Direct Candidate Messaging" selected={true}/>
-            <PricingBenefits text="Standard Support"  selected={true}/>
-            <PricingBenefits text="Featured Badge" selected={true} />
-          </PricingCard>
-          <PricingCard
-            selected={false}
-             date={"/year"}
-            plantype="Enterprise"
-            description={"Our most comprehensive soluation for global teams."}
-            price={"$400"}
-            btntext={"Contact Sales"}
-          >
-            <PricingBenefits text="Unlimited Everything" />
-            <PricingBenefits text="Featured Badge" />
-            <PricingBenefits text="Priority Support" />
-            <PricingBenefits text="Standard Support" />
-          </PricingCard>
-        </section>
+export default function YearlyPricing({
+  plans = [],
+  isLoading = false,
+  isError = false,
+  error = null,
+  onSelectPlan,
+  isCheckingOut = false,
+}) {
+  if (isLoading) {
+    return (
+      <p className="ml-20 pb-[196px] text-text-secondary">
+        Loading plans…
+      </p>
     );
+  }
+
+  if (isError) {
+    return (
+      <p className="ml-20 pb-[196px] text-red-500">
+        Failed to load plans: {error?.message ?? "unknown error"}
+      </p>
+    );
+  }
+
+  if (plans.length === 0) {
+    return (
+      <p className="ml-20 pb-[196px] text-text-secondary">
+        No plans available.
+      </p>
+    );
+  }
+
+  return (
+    <section className="w-[1380px] ml-20 pb-[196px] flex gap-10">
+      {plans.map((plan) => {
+        const card = toSubscriptionPlan(plan, "yearly");
+        return (
+          <PricingCard
+            key={card.id}
+            selected={card.selected}
+            date={card.date}
+            plantype={card.plantype}
+            description={card.description}
+            price={card.price}
+            btntext={isCheckingOut ? "Processing…" : card.btntext}
+            tag={card.tag}
+            onClick={() => onSelectPlan?.(card, "yearly")}
+          >
+            {card.benefits.map((benefit) => (
+              <PricingBenefits
+                key={benefit}
+                text={benefit}
+                selected={card.selected}
+              />
+            ))}
+          </PricingCard>
+        );
+      })}
+    </section>
+  );
 }
