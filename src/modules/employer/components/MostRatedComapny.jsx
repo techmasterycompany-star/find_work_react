@@ -21,12 +21,11 @@ export default function MostMostRatedComapny() {
 
   console.log(highestRates);
 
-  // console.log(highestReviews);
 
   const filteredRates = companyData.filter((r) => {
     return r.ratings === highestRates && r.reviews === highestReviews;
   });
-  // console.log(filteredRates);
+  
 
   let filter = filteredRates;
 

@@ -9,6 +9,7 @@ export default function PricingCard({
   children,
   tag,
   date,
+  onClick,
 }) {
   const icon = () => {
     return (
@@ -67,6 +68,8 @@ export default function PricingCard({
           {tag}
         </span>
         <button
+          type="button"
+          onClick={onClick}
           className={`flex items-center justify-center w-full h-10 py-2 px-4 font-bold border-0 rounded-2sm cursor-pointer text-md ${selected ? "bg-section-2 text-text-primary" : "bg-primary text-white"}`}
         >
           {btntext}

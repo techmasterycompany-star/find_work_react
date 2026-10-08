@@ -5,18 +5,35 @@ import MonthlyPricing from "./MonthlyPricing";
 import YearlyPricing from "./YearlyPricing";
 
 
-export default function Pricing({ firsttitle, titlespan, description }) {
+export default function Pricing({
+  firsttitle,
+  titlespan,
+  description,
+  plans = [],
+  isLoading = false,
+  isError = false,
+  error = null,
+  onSelectPlan,
+  checkoutError = null,
+  isCheckingOut = false,
+}) {
   const [pricetype, setpricetype] = useState("monthly");
-  
-  const result =() => {
-         if(pricetype == "monthly"){
-          return <MonthlyPricing/>;
-         }else{
-          return <YearlyPricing/>;
-         }
-  }
 
-  
+  const result = () => {
+    const shared = {
+      plans,
+      isLoading,
+      isError,
+      error,
+      onSelectPlan,
+      isCheckingOut,
+    };
+    if (pricetype === "Yearly") {
+      return <YearlyPricing {...shared} />;
+    }
+    return <MonthlyPricing {...shared} />;
+  };
+
   return (
     <>
       <section className="bg-card-2 pt-16">
@@ -46,7 +63,7 @@ export default function Pricing({ firsttitle, titlespan, description }) {
             borderRadius: "22px",
             margin: "auto",
             marginTop: "40px",
-            marginBottom: "112px",
+            marginBottom: checkoutError ? "24px" : "112px",
 
             "& .MuiToggleButton-root": {
               textTransform: "none",
@@ -80,6 +97,11 @@ export default function Pricing({ firsttitle, titlespan, description }) {
             Save 20%
           </div>
         </ToggleButtonGroup>
+        {checkoutError && (
+          <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+            {checkoutError}
+          </div>
+        )}
         {result()}
       </section>
     </>

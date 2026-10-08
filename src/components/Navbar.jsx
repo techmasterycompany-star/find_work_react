@@ -4,6 +4,7 @@ import { HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
 import { HiOutlineLanguage } from "react-icons/hi2";
 import { useAuth } from "../context/AuthContext";
 import { logout as logoutRequest } from "../modules/auth/services/authApi";
+import NotificationsBell from "../modules/employer/components/NotificationsBell";
 
 const NAV_CONFIG = {
   guest: {
@@ -28,6 +29,7 @@ const NAV_CONFIG = {
       { label: "Company Profile", to: "/employer" },
       { label: "Analytics", to: "/employer/analytics" },
       { label: "My Jobs", to: "/employer/posting" },
+      { label: "Notifications", to: "/employer/notifications" },
       { label: "Settings", to: "/employer/settings" },
     ],
   },
@@ -66,7 +68,6 @@ export default function Navbar() {
     try {
       await logoutRequest();
     } catch {
-      // backend session invalidation failing shouldn't trap the user logged in locally
     } finally {
       clearSession();
       navigate("/");
@@ -125,13 +126,17 @@ export default function Navbar() {
           >
             <HiOutlineLanguage className="h-5 w-5" />
           </button>
-          <button
-            type="button"
-            aria-label="Notifications"
-            className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
-          >
-            <HiOutlineBell className="h-5 w-5" />
-          </button>
+          {role === "employer" ? (
+            <NotificationsBell />
+          ) : (
+            <button
+              type="button"
+              aria-label="Notifications"
+              className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
+            >
+              <HiOutlineBell className="h-5 w-5" />
+            </button>
+          )}
 
           <span className="px-3 text-sm text-zinc-500 border-l border-zinc-200 ml-2">
             {role === "employer" ? "Employer" : "Candidate"}
