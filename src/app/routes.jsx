@@ -30,8 +30,7 @@ import SavedJobs from "../modules/candidate/pages/SavedJobs";
 import EmployerAnalytics from "../modules/employer/pages/EmployerAnalytics";
 import MyJobs from "../modules/employer/pages/MyJobs";
 import ApplicationList from "../modules/employer/pages/ApplicationList";
-
-
+import ApplicantDetails from "../modules/employer/pages/ApplicantDetails";
 export function AppRoutes() {
   return (
     <>
@@ -87,6 +86,7 @@ export function AppRoutes() {
             <Route path="myjobs">
               <Route index element={<MyJobs/>} />
               <Route path="applicants/:applicantsId" element={<ApplicationList/>}/>
+              <Route path="profile/:profileId" element={<ApplicantDetails/>}/>
             </Route>
 
           </Route>

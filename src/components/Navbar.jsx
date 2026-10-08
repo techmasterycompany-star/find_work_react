@@ -9,7 +9,7 @@ const NAV_CONFIG = {
   guest: {
     links: [
       { label: "Home", to: "/", end: true },
-      { label: "Find Jobs", to: "/jobs" },
+      { label: "Find Jobs", to: "/find-jobs" },
       { label: "Companies", to: "/companies" },
       { label: "About Us", to: "/about" },
       { label: "Pricing", to: "/pricing" },

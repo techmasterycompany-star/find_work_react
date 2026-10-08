@@ -1,12 +1,14 @@
 // =====================================================================
-// UserManagementStats — now uses the SAME visual design as StatsCards
-// and JobStatsCards (the "correct" Figma design with the Notch button).
+// OverviewStats — 4-card stats grid for the Overview page
+// ---------------------------------------------------------------------
+// Uses the SAME visual design as StatsCards.jsx / JobStatsCards.jsx
+// (the "correct" Figma design with the Notch button top-right).
 //
 // Cards:
-//   1. (purple)   Total Users      → requires review
-//   2. (white)    Active Users     → green caption
-//   3. (white)    Candidates       → indigo caption
-//   4. (white)    Employers        → purple caption
+//   1. (purple)  Activation Company → pending employers count
+//   2. (white)    Pending Jobs      → /admin/reviewjobs count
+//   3. (white)    Total Jobs        → /jobs count
+//   4. (white)    Total Users       → /admin/users count
 // =====================================================================
 
 import { FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
@@ -38,43 +40,43 @@ function WhiteStatCard({ label, value, caption, captionClass }) {
   );
 }
 
-export default function UserManagementStats({ stats = {} }) {
+export default function OverviewStats({ stats }) {
   const fmt = (n) => (n ?? 0).toLocaleString('en-US');
 
   return (
     <div className="grid grid-cols-4 gap-6">
-      {/* Card 1: Total Users (highlighted) */}
+      {/* Card 1: Activation Company (highlighted) */}
       <div className={`relative h-[156px] overflow-hidden rounded-lg p-6 text-zinc-200 ${GRADIENT}`}>
         <Notch dark />
-        <p className="text-xs">Total Users</p>
-        <p className="mt-5 text-2xl font-semibold">{fmt(stats.total)}</p>
+        <p className="text-xs">Activation Company</p>
+        <p className="mt-5 text-2xl font-semibold">{fmt(stats.pendingEmployers)}</p>
         <span className="mt-5 flex items-center gap-2 text-sm font-semibold text-white">
           Requires your review <FiArrowRight size={18} />
         </span>
       </div>
 
-      {/* Card 2: Active Users */}
+      {/* Card 2: Pending Jobs */}
       <WhiteStatCard
-        label="Active Users"
-        value={fmt(stats.active)}
-        caption="Active users"
-        captionClass="text-[#22C55E]"
+        label="Pending Jobs"
+        value={fmt(stats.pendingJobs)}
+        caption="Awaiting approval"
+        captionClass="text-[#FCA108]"
       />
 
-      {/* Card 3: Candidates */}
+      {/* Card 3: Total Jobs */}
       <WhiteStatCard
-        label="Candidates"
-        value={fmt(stats.candidates)}
-        caption="Candidate accounts"
-        captionClass="text-[#6366F1]"
+        label="Total Jobs"
+        value={fmt(stats.totalJobs)}
+        caption="All jobs on platform"
+        captionClass="text-zinc-600"
       />
 
-      {/* Card 4: Employers */}
+      {/* Card 4: Total Users */}
       <WhiteStatCard
-        label="Employers"
-        value={fmt(stats.employers)}
-        caption="Employer accounts"
-        captionClass="text-[#8B5CF6]"
+        label="Total User"
+        value={fmt(stats.totalUsers)}
+        caption="All registered users"
+        captionClass="text-zinc-600"
       />
     </div>
   );

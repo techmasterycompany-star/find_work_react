@@ -1,76 +1,75 @@
 import { createContext } from "react";
 import figma from "../assets/figma.png";
+import { useState } from "react";
 let jobdata = [
   {
     id: "1",
     img: figma,
     date: "Posted 4 days ago",
+    publication: "Last 3 days",
     title: "UI/UX Designer",
-    type: "Full-Time",
+    type: "Part-Time",
     applications: "24 applications",
+    education: "Masters",
     views: "1.2k Views",
     status: "Active",
-    location: "hybird",
+    location: "Remote job",
     company: "EnterpriseSoft",
+    salary: "$10 - $100",
+    Address: "Giza, Egypt",
+    categorey: "UI/UX Designer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-    isSaved:false,
-    apply:false,
-    active:true,
-    isExpired:false,
-=======
-     salary: "$10 - $100",
-      rate: 4.5,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+    isSaved: false,
+    apply: false,
+    active: true,
+    isExpired: false,
+    rate: 4.5,
   },
   {
     id: "2",
     img: figma,
     date: "Posted 6 days ago",
+    publication: "Last 24 hours",
     title: "Frontend Developer",
     applications: "28 applications",
     views: "890 Views",
     type: "Full-Time",
-    location: "hybird",
+    education: "Student",
+    location: "Onsite",
     status: "Active",
     company: "EnterpriseSoft",
+    salary: "$10 - $100",
+    Address: "Giza, Egypt",
+    categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-    isSaved:false,
-    apply:true,
-    active:false,
-    isExpired:true,
-=======
-     salary: "$10 - $100",
+    isSaved: false,
+    apply: true,
+    active: false,
+    isExpired: true,
       rate: 4.5,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   },
   {
     id: "3",
     img: figma,
     date: "Posted 12 days ago",
+    publication: "Last 14 days",
     title: "Senior DevOps Arvhitect",
     applications: "15 applications",
     views: "310 Views",
     type: "Full-Time",
+    education: "Bachelor's degree",
     status: "Closing Soon",
     location: "hybird",
     company: "EnterpriseSoft",
+    salary: "$10 - $100",
+    Address: "Giza, Egypt",
+    categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-    isSaved:false,
-    apply:false,
-    active:false,
-    isExpired:true,
-
+    isSaved: false,
+    apply: false,
+    active: false,
+    isExpired: true,
+      rate: 4.5,
   },
   {
     id: "4",
@@ -89,11 +88,11 @@ let jobdata = [
     Address: "Giza, Egypt",
     categorey: "UI/UX Designer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-    isSaved:false,
-    apply:true,
-    active:true,
-    isExpired:true,
-
+    isSaved: false,
+    apply: true,
+    active: true,
+    isExpired: true,
+      rate: 4.5,
   },
   {
     id: "5",
@@ -112,9 +111,10 @@ let jobdata = [
     Address: "Giza, Egypt",
     categorey: "Project Manager",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-    isSaved:false,
-    apply:false,
-    active:true
+    isSaved: false,
+    apply: false,
+    active: true,
+      rate: 4.5,
   },
   {
     id: "6",
@@ -133,22 +133,28 @@ let jobdata = [
     Address: "Giza, Egypt",
     categorey: "Software Developer",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et...",
-    isSaved:false,
-    apply:true,
-    active:false,
-    isExpired:true,
-=======
-     salary: "$10 - $100",
+    isSaved: false,
+    apply: true,
+    active: false,
+    isExpired: true,
       rate: 4.5,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   },
 ];
 
 export const jobcontext = createContext({});
 
 export function JobProvider({ children }) {
+  const [jobs, setJobs] = useState(jobdata);
+
+  const handleSave = (id) => {
+    setJobs((jobs) =>
+      jobs.map((job) => (job.id === id ? { ...job, isSaved: true } : job)),
+    );
+  };
+
   return (
-    <jobcontext.Provider value={{ jobdata }}>{children}</jobcontext.Provider>
+    <jobcontext.Provider value={{ jobs, jobdata, handleSave }}>
+      {children}
+    </jobcontext.Provider>
   );
 }

@@ -1,7 +1,6 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
 import HeaderSec from "../../../components/HeaderSec";
-import JobCard from "../components/JobCard";
 import ApplicationsCard from "../components/ApplicationsCard";
 
 export default function MyJobs() {

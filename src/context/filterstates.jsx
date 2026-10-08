@@ -6,11 +6,25 @@ export const filtercontext = createContext();
 export function FilterProvider({ children }) {
   const [checked, setchecked] = useState({ exp: false, available: false });
 
+  const [ApplicantsChecked, setApplicantsChecked] = useState({
+    categorey: [],
+    status:[],
+    skill: "",
+  });
+
+  const [jobChecked, setjobChecked] = useState({
+    categorey: [],
+    date: [],
+    education: [],
+    jobtype: [],
+    mode: [],
+  });
+
   const [companyChecked, setcompanyChecked] = useState({
     categorey: [],
     size: [],
   });
-  const [radioChecked,setradioChecked]=useState("");
+  const [radioChecked, setradioChecked] = useState("");
   const [inputskillvalue, setinputskillvalue] = useState({
     skill: "",
     location: "",
@@ -27,8 +41,12 @@ export function FilterProvider({ children }) {
         setinputjobvalue,
         companyChecked,
         setcompanyChecked,
+        jobChecked,
+        setjobChecked,
         radioChecked,
-        setradioChecked
+        setradioChecked,
+        ApplicantsChecked,
+        setApplicantsChecked,
       }}
     >
       {children}

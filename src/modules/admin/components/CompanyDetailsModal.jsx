@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import {
   FiBriefcase,
   FiDownload,
@@ -6,29 +6,33 @@ import {
   FiPhone,
   FiShield,
   FiX,
-} from "react-icons/fi";
-import { CompanyLogo, StatusBadge } from "./CompaniesTable";
+} from 'react-icons/fi';
+import { CompanyLogo, StatusBadge } from './CompaniesTable';
 
 export default function CompanyDetailsModal({
   company,
   onClose,
   onActivate,
   onReject,
+  isActivating = false,
+  isRejecting = false,
+  activateError,
+  rejectError,
 }) {
-  // Close on Esc + lock body scroll while open
   useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
+    const onKey = (e) => e.key === 'Escape' && onClose();
+    document.addEventListener('keydown', onKey);
     const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.removeEventListener("keydown", onKey);
+      document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prev;
     };
   }, [onClose]);
 
   if (!company) return null;
-  const { details, documents } = company;
+  const { details, documents = [] } = company;
+  const safeDetails = details ?? { industry: '—', size: '—', website: '—', location: '—' };
 
   return (
     <div
@@ -44,9 +48,7 @@ export default function CompanyDetailsModal({
       >
         {/* Header */}
         <div className="flex items-center justify-between p-2.5">
-          <h2 className="text-base font-semibold text-zinc-600">
-            Company Details
-          </h2>
+          <h2 className="text-base font-semibold text-zinc-600">Company Details</h2>
           <button type="button" onClick={onClose} aria-label="Close" className="text-zinc-600">
             <FiX size={16} />
           </button>
@@ -64,12 +66,12 @@ export default function CompanyDetailsModal({
               <span className="text-xs text-zinc-600">{company.email}</span>
               <span className="flex items-center gap-1 text-xs text-zinc-600">
                 <FiPhone size={14} className="text-[#7C3AED]" />
-                {company.phone}
+                {company.phone ?? '—'}
               </span>
             </div>
           </div>
           <p className="text-sm leading-[150%] text-zinc-600">
-            {company.description}
+            {company.description || 'No description provided.'}
           </p>
         </div>
 
@@ -81,13 +83,13 @@ export default function CompanyDetailsModal({
           </h3>
           <dl className="mt-5 grid grid-cols-[110px_1fr] gap-x-4 gap-y-3">
             <dt className="text-xs font-medium text-zinc-600">Industry</dt>
-            <dd className="text-sm text-zinc-800">{details.industry}</dd>
+            <dd className="text-sm text-zinc-800">{safeDetails.industry}</dd>
             <dt className="text-xs font-medium text-zinc-600">Company Size</dt>
-            <dd className="text-sm text-zinc-800">{details.size}</dd>
+            <dd className="text-sm text-zinc-800">{safeDetails.size}</dd>
             <dt className="text-xs font-medium text-zinc-600">Website</dt>
-            <dd className="text-sm text-[#7C3AED]">{details.website}</dd>
+            <dd className="text-sm text-[#7C3AED]">{safeDetails.website}</dd>
             <dt className="text-xs font-medium text-zinc-600">Location</dt>
-            <dd className="text-sm text-zinc-800">{details.location}</dd>
+            <dd className="text-sm text-zinc-800">{safeDetails.location}</dd>
           </dl>
         </section>
 
@@ -97,44 +99,58 @@ export default function CompanyDetailsModal({
             <FiShield size={16} className="text-[#7C3AED]" />
             Verification Documents
           </h3>
-          <ul className="mt-5 flex flex-col gap-3">
-            {documents.map((doc) => (
-              <li
-                key={doc.id}
-                className="flex h-12 items-center justify-between rounded-lg bg-white px-4 shadow-[0_0_4px_rgba(0,0,0,0.25)]"
-              >
-                <span className="flex items-center gap-2 text-sm text-zinc-600">
-                  <FiFileText size={18} className="text-zinc-500" />
-                  {doc.name}
-                </span>
-                <a
-                  href={doc.url}
-                  download
-                  aria-label={`Download ${doc.name}`}
-                  className="text-[#7C3AED]"
+          {documents.length === 0 ? (
+            <p className="mt-5 text-sm text-zinc-400">No documents uploaded.</p>
+          ) : (
+            <ul className="mt-5 flex flex-col gap-3">
+              {documents.map((doc) => (
+                <li
+                  key={doc.id ?? doc.name}
+                  className="flex h-12 items-center justify-between rounded-lg bg-white px-4 shadow-[0_0_4px_rgba(0,0,0,0.25)]"
                 >
-                  <FiDownload size={18} />
-                </a>
-              </li>
-            ))}
-          </ul>
+                  <span className="flex items-center gap-2 text-sm text-zinc-600">
+                    <FiFileText size={18} className="text-zinc-500" />
+                    {doc.name}
+                  </span>
+                  <a
+                    href={doc.url}
+                    download
+                    aria-label={`Download ${doc.name}`}
+                    className="text-[#7C3AED]"
+                  >
+                    <FiDownload size={18} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
+
+        {/* Errors */}
+        {(activateError || rejectError) && (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            {activateError && <p>Activate failed: {activateError}</p>}
+            {rejectError && <p>Reject failed: {rejectError}</p>}
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex gap-4">
           <button
             type="button"
             onClick={() => onActivate(company.id)}
-            className="h-[42px] flex-1 rounded-xl bg-[#22C55E] text-base font-medium text-white transition hover:bg-[#16A34A]"
+            disabled={isActivating || isRejecting}
+            className="h-[42px] flex-1 rounded-xl bg-[#22C55E] text-base font-medium text-white transition hover:bg-[#16A34A] disabled:opacity-60"
           >
-            Activate
+            {isActivating ? 'Activating…' : 'Activate'}
           </button>
           <button
             type="button"
             onClick={() => onReject(company.id)}
-            className="h-[42px] flex-1 rounded-xl border border-[#EF4444] text-base font-medium text-[#EF4444] transition hover:bg-red-50"
+            disabled={isActivating || isRejecting}
+            className="h-[42px] flex-1 rounded-xl border border-[#EF4444] text-base font-medium text-[#EF4444] transition hover:bg-red-50 disabled:opacity-60"
           >
-            Reject
+            {isRejecting ? 'Rejecting…' : 'Reject'}
           </button>
         </div>
       </div>
