@@ -6,6 +6,7 @@ import { filtercontext } from "../../../context/filterstates";
 export default function ApplicantsFilter() {
   const [open, setopen] = useState(false);
   const [openstatus, setopenstatus] = useState(false);
+   const [sort, setsort] = useState("match");
   const { ApplicantsChecked, setApplicantsChecked } = useContext(filtercontext);
 
   function CategoreyCheckValue(e) {
@@ -227,7 +228,7 @@ function InputskillsControl(e) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`size-4 transition-transform duration-200 ${open ? "rotate-180 text-primary" : "rotate-0"} `}
+            className={`size-4 transition-transform duration-200 ${openstatus ? "rotate-180 text-primary" : "rotate-0"} `}
           >
             <path
               strokeLinecap="round"
@@ -346,36 +347,12 @@ function InputskillsControl(e) {
           Sort By 
         </label>
         <br></br>
-        <input
-          value={ApplicantsChecked.skill}
-          onChange={InputskillsControl}
-          id="sort"
-          list="Sort"
-          className="px-4 h-10 py-2 w-full outline-none border-1 border-border1 rounded-2sm"
-        />
-        {ApplicantsChecked.skill != "" ? (
-          <div className="mt-2 h-5 w-fit py-1 px-2 rounded-[4px] text-[12px] flex-between font-semibold text-primary bg-btn-secondary">
-            {ApplicantsChecked.skill}
-            <button className="cursor-pointer" onClick={Close}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-4 text-icon-primary"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
+      <select className="w-full h-12 rounded-2sm border-1 border-border1 px-3 py-2 mt-3 outline-0" value={sort} onChange={(e)=>{
+         setsort(e.target.value)
+      }}>
+        <option value="match">Highest Match Score</option>
+        <option value="rate">Highest Rate</option>
+      </select>
         <datalist id="Sort">
           <option value="Highest Match Score"></option>
           <option value="React"></option>

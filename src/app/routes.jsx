@@ -55,7 +55,7 @@ export function AppRoutes() {
             element={<CompanyDetails />}
           />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/find-jobs" element={<FindJobs/>}/>
+          <Route path="/find-jobs" element={<FindJobs />} />
         </Route>
 
         {/* Auth flow */}
@@ -82,13 +82,17 @@ export function AppRoutes() {
             </Route>
 
             <Route path="pricing" element={<PricingPage />} />
-            <Route path="analytics" element={<EmployerAnalytics/>}/>
+            <Route path="analytics" element={<EmployerAnalytics />} />
             <Route path="myjobs">
-              <Route index element={<MyJobs/>} />
-              <Route path="applicants/:applicantsId" element={<ApplicationList/>}/>
-              <Route path="profile/:profileId" element={<ApplicantDetails/>}/>
+              <Route index element={<MyJobs />} />
+              <Route path="applicants/:applicantsId">
+                <Route index element={<ApplicationList />} />
+                <Route
+                  path="profile/:profileId"
+                  element={<ApplicantDetails />}
+                />
+              </Route>
             </Route>
-
           </Route>
 
           {/* Candidate flow */}
@@ -96,7 +100,7 @@ export function AppRoutes() {
             <Route index element={<CandidateHome />} />
             <Route path="find-jobs" element={<FindJobs />} />
             <Route path="pricing" element={<PricingPage />} />
-            <Route path="saved" element={<SavedJobs />}/>
+            <Route path="saved" element={<SavedJobs />} />
           </Route>
         </Route>
       </Routes>

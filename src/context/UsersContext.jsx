@@ -67,6 +67,7 @@ export let candidatedata = [
     desc: "Leads the design process from research to final interfaces, creating user-focused experiences while guiding design decisions and maintaining consistency.",
     match: "98% Match",
     status:"shortlisted",
+    categorey: "UI/UX Designer",
     price: "$90/hr",
     exp: "0-1 years",
     profileViews: 500,
