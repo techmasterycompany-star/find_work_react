@@ -24,6 +24,17 @@ import PublicLayout from "../layouts/PublicLayout";
 
 import ScrollToTop from "../modules/employer/components/scrolltotop";
 import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+import FindJobs from "../modules/public/pages/FindJobs";
+import SavedJobs from "../modules/candidate/pages/SavedJobs";
+=======
+import EmployerAnalytics from "../modules/employer/pages/EmployerAnalytics";
+import MyJobs from "../modules/employer/pages/MyJobs";
+import ApplicationList from "../modules/employer/pages/ApplicationList";
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 export function AppRoutes() {
   return (
@@ -75,6 +86,12 @@ export function AppRoutes() {
             </Route>
 
             <Route path="pricing" element={<PricingPage />} />
+            <Route path="analytics" element={<EmployerAnalytics/>}/>
+            <Route path="myjobs">
+              <Route index element={<MyJobs/>} />
+              <Route path="applicants/:applicantsId" element={<ApplicationList/>}/>
+            </Route>
+
           </Route>
 
           {/* Candidate flow */}

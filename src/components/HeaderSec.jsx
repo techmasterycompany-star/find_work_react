@@ -9,11 +9,11 @@ export default function HeaderSec({ title, description, img , titlestart,BreadCr
         <div className="title flex-between">
           <div>
             {BreadCrump}
-            <h1 className="text-4xl text-text-primary font-semibold mb-4">{title.slice(titlestart,titleend)} <span className="text-primary">{str}</span> </h1>
+            <h1 className="text-4xl text-text-primary font-semibold mb-4">{title.slice(titlestart,titleend)}<span className="text-primary">{str}</span> </h1>
             <p className="font-normal text-text-secondary text-lg">{description}</p>
           </div>
           <div className="img w-[320px] h-[180px]">
-            <img className="max-w-full" src={img} alt="photo" />
+            <img className="max-w-full" src={img} alt="" />
           </div>
         </div>
         <div className="mt-12 flex-center">
