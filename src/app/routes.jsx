@@ -28,6 +28,10 @@ import { RequireAuth, RedirectIfAuthenticated } from "./routeGuards";
 import { RequireEmployer } from "./RequireEmployer";
 import FindJobs from "../modules/public/pages/FindJobs";
 import SavedJobs from "../modules/candidate/pages/SavedJobs";
+import CandidateAnalytics from "../modules/candidate/pages/CandidateAnalytics";
+import CandidateSettings from "../modules/candidate/pages/CandidateSettings";
+import CandidateNotifications from "../modules/candidate/pages/CandidateNotifications";
+import JobDetails from "../modules/public/pages/JobDetails";
 
 export function AppRoutes() {
   return (
@@ -91,6 +95,10 @@ export function AppRoutes() {
             <Route path="find-jobs" element={<FindJobs />} />
             <Route path="pricing" element={<PricingPage />} />
             <Route path="saved" element={<SavedJobs />} />
+            <Route path="analytics" element={<CandidateAnalytics />} />
+            <Route path="settings" element={<CandidateSettings />} />
+            <Route path="notifications" element={<CandidateNotifications />} />
+            <Route path="jobs/:jobId" element={<JobDetails />} />
           </Route>
         </Route>
       </Routes>

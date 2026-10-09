@@ -1,16 +1,3 @@
-// =====================================================================
-// AdminApp — admin entry point
-// ---------------------------------------------------------------------
-// Adds the Settings sub-routes:
-//   /admin/settings              → redirect to /admin/settings/account
-//   /admin/settings/account     → AccountSettings (Frame 1)
-//   /admin/settings/moderation  → ModerationSettings (Frames 2-4)
-//   /admin/settings/security    → SettingsPlaceholder
-//   /admin/settings/roles       → SettingsPlaceholder
-//   /admin/settings/platform    → SettingsPlaceholder
-//   /admin/settings/help        → SettingsPlaceholder
-// =====================================================================
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 
@@ -28,7 +15,7 @@ import JobMangementPage from './modules/admin/pages/JobMangement';
 import Analytics from './modules/admin/pages/Analytics';
 import AdminNotification from './modules/admin/pages/AdminNotification';
 
-// Settings pages
+
 import AccountSettings from './modules/admin/pages/settings/AccountSettings';
 import ModerationSettings from './modules/admin/pages/settings/ModerationSettings';
 
@@ -51,14 +38,13 @@ export default function AdminApp() {
                 <Route path="analytics" element={<Analytics />} />
                 <Route path="notifications" element={<AdminNotification />} />
 
-                {/* Settings — redirect bare /settings to /settings/account */}
+                {/* Settings */}
                 <Route path="settings" element={<Navigate to="/admin/settings/account" replace />} />
                 <Route path="settings/account" element={<AccountSettings />} />
                 <Route path="settings/moderation" element={<ModerationSettings />} />
               </Route>
             </Route>
 
-            {/* Fallback so any unknown path under /admin lands on the dashboard */}
             <Route path="*" element={<Navigate to="/admin" replace />} />
           </Routes>
         </AuthProvider>

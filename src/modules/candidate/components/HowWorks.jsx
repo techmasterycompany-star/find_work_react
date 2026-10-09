@@ -33,7 +33,6 @@ export default function HowWorks() {
             </svg>
           }
         />
-        {/* icon */}
         <div className="w-16 h-16 flex-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +76,6 @@ export default function HowWorks() {
             </svg>
           }
         />
-        {/* icon */}
         <div className="w-16 h-16 flex-center">
          <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +118,6 @@ export default function HowWorks() {
             </svg>
           }
         />
-        {/* icon */}
         <div className="w-16 h-16 flex-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

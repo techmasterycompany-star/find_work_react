@@ -1,118 +1,73 @@
 import { useContext } from "react";
 import { filtercontext } from "../../../context/filterstates";
-import { jobcontext } from "../../../context/JobContext";
+import { usePublicJobs } from "../../public/hooks/usePublicQueries";
+import { useSaveJob } from "../../candidate/hooks/useCandidateQueries";
 import FindJobCard from "./FindJobCard";
 
-
-
-
 export default function JobsCardlist() {
-  const { jobdata } = useContext(jobcontext);
+  const { data: jobdata = [], isLoading, isError } = usePublicJobs();
   const { jobChecked, radioChecked } = useContext(filtercontext);
+  const saveJob = useSaveJob();
 
+  const handleSave = (jobId) => {
+    saveJob.mutate(jobId);
+  };
 
-  const { handleSave } = useContext(jobcontext);
+  if (isLoading) {
+    return (
+      <div className="col-span-2 py-12 text-center text-sm text-gray-500">
+        Loading jobs…
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div className="col-span-2 py-12 text-center text-sm text-red-500">
+        Failed to load jobs. Please try again later.
+      </div>
+    );
+  }
+  if (jobdata.length === 0) {
+    return (
+      <div className="col-span-2 py-12 text-center text-sm text-gray-500">
+        No jobs available right now.
+      </div>
+    );
+  }
 
- 
-  let joblistfull = jobdata.map((job) => {
-    return {
-      data: job,
-      card: <FindJobCard key={job.id} job={job} onSave={handleSave} />,
-    };
-  });
+  const joblistfull = jobdata.map((job) => ({
+    data: job,
+    card: <FindJobCard key={job.id} job={job} onSave={handleSave} />,
+  }));
 
-let filter = joblistfull;
+  let filter = joblistfull;
 
-if (jobChecked.categorey.length > 0) {
-  filter = filter.filter((f) => {
-    return jobChecked.categorey.includes(f.data.categorey);
-  });
+  if (jobChecked.categorey.length > 0) {
+    filter = filter.filter((f) => jobChecked.categorey.includes(f.data.categorey));
+  }
+  if (jobChecked.date.length > 0) {
+    filter = filter.filter((f) => jobChecked.date.includes(f.data.publication));
+  }
+  if (jobChecked.education.length > 0) {
+    filter = filter.filter((f) => jobChecked.education.includes(f.data.education));
+  }
+  if (jobChecked.jobtype.length > 0) {
+    filter = filter.filter((f) => jobChecked.jobtype.includes(f.data.type));
+  }
+  if (radioChecked) {
+    filter = filter.filter((f) => radioChecked.includes(f.data.salary));
+  }
+  if (jobChecked.mode.length > 0) {
+    filter = filter.filter((f) => jobChecked.mode.includes(f.data.location));
+  }
+
+  if (filter.length === 0) {
+    return (
+      <div className="col-span-2 py-12 text-center text-sm text-gray-500">
+        No jobs match your filters.
+      </div>
+    );
+  }
+
+  return <>{filter.map((m) => m.card)}</>;
 }
-
-if (jobChecked.date.length > 0) {
-  filter = filter.filter((f) => {
-    return jobChecked.date.includes(f.data.publication);
-  });
-}
-
-if (jobChecked.education.length > 0) {
-  filter = filter.filter((f) => {
-    return jobChecked.education.includes(f.data.education);
-  });
-}
-
-if (jobChecked.jobtype.length > 0) {
-  filter = filter.filter((f) => {
-    return jobChecked.jobtype.includes(f.data.type);
-  });
-}
-
-if (radioChecked) {
-  filter = filter.filter((f) => {
-    return radioChecked.includes(f.data.salary);
-  });
-}
-
-if (jobChecked.mode.length > 0) {
-  filter = filter.filter((f) => {
-    return jobChecked.mode.includes(f.data.location);
-  });
-}
-
-
-let filtermap = filter.map((m) => {
-  return m.card;
-});
-
-return (
-  <>
-    {filtermap}
-  </>
-)
-}
-
-// if (inputskillvalue.location) {
-//   filter = filter.filter((f) => {
-//     return (
-//       f.data.location.toLowerCase() ==
-//       inputskillvalue.location.toLowerCase()
-//     );
-//   });
-// }
-
-// if (inputjobvalue) {
-//   filter = filter.filter((f) => {
-//     return (
-//       f.data.job.toLowerCase() ==
-//       inputjobvalue.toLowerCase()
-//     );
-//   });
-// }
-
-// if(checked.available.checked == true && checked.available.value){
-//   filter = filter.filter((f)=>{
-//      return f.data.available == checked.available.value
-//   })
-// }
-
-// if(checked.exp.checked == true && checked.exp.value){
-//   filter=filter.filter((f)=>{
-//     if(checked.exp.value === "0-1 years"){
-//       return f.data.exp == "0-1 years"
-
-//     }else if(checked.exp.value === "1-3 years"){
-//       return f.data.exp == "1-3 years"
-
-//     }else if(checked.exp.value === "3-5 years"){
-//       return f.data.exp == "3-5 years"
-
-//     }else if(checked.exp.value === "5+ years"){
-//       return f.data.exp == "5+ years"
-      
-//     }else{
-//       return f.data.exp 
-//     }
-//   })
-// }
-
-

@@ -39,8 +39,6 @@ const WIZARD_CONFIG = {
   },
 };
 
-// Only used on this one screen, so it stays a local function rather than a
-// shared component — nothing else in the app needs a password-strength bar.
 function getPasswordChecks(password) {
   return [
     { label: "At least 8 characters", met: password.length >= 8 },
@@ -72,8 +70,7 @@ export default function CandidateSignup() {
 
   const handleNext = () => {
     if (step === 1) {
-      // Business rule specific to this page (password match) — kept local
-      // rather than pushed into the shared hook, which only knows "required".
+      
       if (formData.password !== formData.confirmPassword) {
         setErrors((prev) => ({
           ...prev,

@@ -14,8 +14,6 @@ export default function Congrats() {
   return (
     <AuthLayout>
       <div className="relative flex w-full justify-center px-5 py-20">
-        {/* Decorative elements */}
-
         <span className="absolute left-[18%] top-[25px] text-[#F4B400] text-xl">
           ◆
         </span>
@@ -38,7 +36,6 @@ export default function Congrats() {
 
         <span className="absolute right-[15%] bottom-[0px] h-3 w-3 rounded-full bg-[#8B5CF6]" />
 
-        {/* Congratulations Card */}
         <div
           className="
             flex
@@ -56,9 +53,7 @@ export default function Congrats() {
             shadow-[0px_16px_32px_0px_rgba(15,23,42,0.05)]
           "
         >
-          {/* Card Content */}
           <div className="flex w-full max-w-[704px] flex-col items-center gap-8 text-center">
-            {/* Success Icon */}
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DCFCE7]">
               <svg
                 viewBox="0 0 24 24"
@@ -75,7 +70,6 @@ export default function Congrats() {
               </svg>
             </div>
 
-            {/* Text */}
             <div className="flex flex-col items-center gap-2">
               <h1 className="text-[24px] font-bold leading-[32px] text-[#18181B]">
                 Congratulations!
@@ -92,7 +86,6 @@ export default function Congrats() {
               </p>
             </div>
 
-            {/* Main Button */}
             <div className="w-full">
               <Link
                 to={dashboardPath}
@@ -119,7 +112,6 @@ export default function Congrats() {
               </Link>
             </div>
 
-            {/* Secondary Link */}
             <p className="text-[12px] text-[#71717A]">
               Or, back to{" "}
               <Link

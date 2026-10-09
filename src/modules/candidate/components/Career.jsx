@@ -46,11 +46,9 @@ export default function Career() {
         </p>
       </div>
       <div className="flex items-center gap-8">
-        {/* articles */}
         <div className="w-full h-full">
           <CareerCard />
         </div>
-        {/* demand skills */}
         <div className="w-full h-full bg-card-2 border-1 border-primary p-8 rounded-lg">
           <div className="title">
             <h3 className="text-lg text-text-primary font-semibold mb-2">

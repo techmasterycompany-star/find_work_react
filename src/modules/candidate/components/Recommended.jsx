@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
+import { usePublicJobs } from "../../public/hooks/usePublicQueries";
 
-export default function Recommended() {
-  const JOBS = Array.from({ length: 3 }, () => ({
-  title: 'UI/UX Designer',
-  company: 'Tech Company',
-  posted: '1 hour ago',
-  types: ['Full-Time', 'Hybrid'],
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor et...',
-  location: 'Canada',
-  salary: '$40000-$42000',
-}));
-
-function CompanyLogo() {
+function CompanyLogo({ logo }) {
+  if (logo) {
+    return (
+      <img
+        src={logo}
+        alt=""
+        className="h-9 w-9 shrink-0 rounded-lg object-cover bg-zinc-100"
+      />
+    );
+  }
   return (
     <div className="grid grid-cols-2 gap-0.5 h-9 w-9 shrink-0">
       <span className="bg-red-500 rounded-tl" />
@@ -23,6 +22,7 @@ function CompanyLogo() {
 }
 
 function JobCard({ job }) {
+  const types = Array.isArray(job.types) ? job.types : [job.type].filter(Boolean);
   return (
     <div className="rounded-2xl border border-zinc-200 bg-white p-5">
       <div className="flex items-start justify-between">
@@ -31,19 +31,25 @@ function JobCard({ job }) {
       </div>
 
       <div className="mt-3 flex items-center gap-2">
-        <CompanyLogo />
+        <CompanyLogo logo={job.companyLogo} />
         <div>
           <p className="text-sm text-zinc-700">{job.company}</p>
-          <div className="mt-1 flex gap-2">
-            {job.types.map((t) => (
-              <span
-                key={t}
-                className={`text-xs font-medium ${t === 'Hybrid' ? 'text-green-600' : 'text-violet-600'}`}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+          {types.length > 0 && (
+            <div className="mt-1 flex gap-2">
+              {types.map((t) => (
+                <span
+                  key={t}
+                  className={`text-xs font-medium ${
+                    t === "Hybrid" || t === "Remote"
+                      ? "text-green-600"
+                      : "text-violet-600"
+                  }`}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -67,9 +73,12 @@ function JobCard({ job }) {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        <button type="button" className="flex-1 py-2.5 rounded-lg bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700">
+        <Link
+          to={`/candidate/find-jobs`}
+          className="flex-1 py-2.5 rounded-lg bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 text-center"
+        >
           Job Details
-        </button>
+        </Link>
         <button type="button" aria-label="Save job" className="h-10 w-10 shrink-0 rounded-lg border border-violet-200 text-violet-600 flex items-center justify-center hover:bg-violet-50">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M6 4h12v16l-6-4-6 4V4Z" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,7 +89,10 @@ function JobCard({ job }) {
   );
 }
 
-    
+export default function Recommended() {
+  const { data: jobs = [], isLoading, isError } = usePublicJobs();
+  const recommended = jobs.slice(0, 3);
+
   return (
     <section className="p-20">
       <div className="flex items-start justify-between mb-8">
@@ -89,15 +101,14 @@ function JobCard({ job }) {
             Recommended for You
           </h2>
           <p className="mt-1 text-sm text-zinc-500">
-            Based on your expertise in React, Figma, and high-fidelity
-            prototyping.
+            Fresh roles matching your skills and expertise.
           </p>
         </div>
         <Link
-          to="/jobs"
+          to="/candidate/find-jobs"
           className=" text-primary text-sm font-semibold flex-gap2 hover:underline whitespace-nowrap"
         >
-          View all 24 recommendations
+          View all {jobs.length} jobs
           <svg
             viewBox="0 0 24 24"
             className="h-4 w-4"
@@ -113,11 +124,27 @@ function JobCard({ job }) {
           </svg>
         </Link>
       </div>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
-        {JOBS.map((job, i) => (
-          <JobCard key={i} job={job} />
-        ))}
-      </div>
+
+      {isLoading ? (
+        <p className="py-8 text-center text-sm text-zinc-500">Loading recommendations…</p>
+      ) : isError ? (
+        <p className="py-8 text-center text-sm text-red-500">Failed to load jobs.</p>
+      ) : recommended.length === 0 ? (
+        <p className="py-8 text-center text-sm text-zinc-500">No jobs available right now.</p>
+      ) : (
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {recommended.map((job) => (
+            <JobCard
+              key={job.id}
+              job={{
+                ...job,
+                posted: job.date, 
+                description: job.desc,
+              }}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

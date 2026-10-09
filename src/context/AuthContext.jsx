@@ -3,10 +3,8 @@ import { getCurrentUser, login as loginRequest } from "../modules/auth/services/
 
 const TOKEN_STORAGE_KEY = "token";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
 

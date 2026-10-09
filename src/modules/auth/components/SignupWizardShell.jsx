@@ -14,8 +14,6 @@ export default function SignupWizardShell({
 }) {
   return (
     <div className="w-full h-full flex flex-col">
-
-      {/* Logo + Step Indicator */}
       <div className="flex flex-col items-center gap-[16px]">
         <img
           src={logo}
@@ -23,23 +21,15 @@ export default function SignupWizardShell({
           className="w-[72px] h-[48px] object-contain"
         />
 
-        <StepIndicator
-          steps={STEP_LABELS}
-          currentStep={step}
-        />
+        <StepIndicator steps={STEP_LABELS} currentStep={step} />
       </div>
 
-      {/* Title */}
       <h2 className="mt-[24px] text-[18px] leading-[24px] font-semibold text-gray-900">
         {title}
       </h2>
 
-      {/* Form Content */}
-      <div className="mt-[16px] flex-1">
-        {children}
-      </div>
+      <div className="mt-[16px] flex-1">{children}</div>
 
-      {/* Buttons */}
       <div className="w-full h-[48px] flex gap-[16px]">
         <button
           type="button"
@@ -79,7 +69,6 @@ export default function SignupWizardShell({
           {nextLabel}
         </button>
       </div>
-
     </div>
   );
 }

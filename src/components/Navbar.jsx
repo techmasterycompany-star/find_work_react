@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
+import { HiOutlineMoon } from "react-icons/hi";
 import { HiOutlineLanguage } from "react-icons/hi2";
 import { useAuth } from "../context/AuthContext";
 import { logout as logoutRequest } from "../modules/auth/services/authApi";
 import NotificationsBell from "../modules/employer/components/NotificationsBell";
+import CandidateNotificationsBell from "../modules/candidate/components/CandidateNotificationsBell";
 
 const NAV_CONFIG = {
   guest: {
@@ -42,10 +43,10 @@ const NAV_CONFIG = {
       { label: "Pricing", to: "/candidate/pricing" },
     ],
     menu: [
-      { label: "My Profile", to: "/candidate" },
-      { label: "Applications", to: "/candidate/applications" },
+      { label: "Analytics", to: "/candidate/analytics" },
       { label: "Saved Jobs", to: "/candidate/saved" },
       { label: "Settings", to: "/candidate/settings" },
+      { label: "Log Out", to: "__logout__" },
     ],
   },
 };
@@ -129,13 +130,7 @@ export default function Navbar() {
           {role === "employer" ? (
             <NotificationsBell />
           ) : (
-            <button
-              type="button"
-              aria-label="Notifications"
-              className="relative h-12 w-12 rounded-xl flex items-center justify-center text-zinc-600 hover:bg-zinc-100"
-            >
-              <HiOutlineBell className="h-5 w-5" />
-            </button>
+            <CandidateNotificationsBell />
           )}
 
           <span className="px-3 text-sm text-zinc-500 border-l border-zinc-200 ml-2">
@@ -171,23 +166,27 @@ export default function Navbar() {
 
             {menuOpen && (
               <div className="absolute right-0 top-14 w-52 rounded-xl border border-zinc-200 bg-white shadow-lg overflow-hidden z-50">
-                {config.menu.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.to}
-                    onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-3 text-sm text-zinc-700 hover:bg-zinc-50 border-b border-zinc-100"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-3 text-sm font-semibold text-red-600 hover:bg-zinc-50"
-                >
-                  Log Out
-                </button>
+                {config.menu.map((item) =>
+                  item.to === "__logout__" ? (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-3 text-sm font-semibold text-red-600 hover:bg-zinc-50 border-b border-zinc-100"
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="block px-4 py-3 text-sm text-zinc-700 hover:bg-zinc-50 border-b border-zinc-100"
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             )}
           </div>

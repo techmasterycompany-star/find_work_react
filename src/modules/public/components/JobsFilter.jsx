@@ -110,11 +110,9 @@ export default function JobsFilter() {
   }
   return (
     <div className="w-[296px] rounded-2sm border-1 border-border1 bg-card-2 py-4 px-2">
-      {/*title*/}
       <div className="px-4 py-2 border-b-1 border-b-border1 text-text-primary text-lg font-medium mb-2">
         All Filters
       </div>
-      {/* categorey */}
       <div className="py-2 border-b-1 border-b-border1 mb-2">
         <button
           value={open}
@@ -384,7 +382,6 @@ export default function JobsFilter() {
           ""
         )}
       </div>
-      {/* Education level */}
       <div className="py-2 border-b-1 border-b-border1 mb-2">
         <button
           value={openEducation}
@@ -494,7 +491,6 @@ export default function JobsFilter() {
           ""
         )}
       </div>
-      {/* Job type */}
       <div className="py-2 border-b-1 border-b-border1 mb-2">
         <button
           value={openType}

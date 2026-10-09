@@ -22,7 +22,7 @@ export default function SavedJobs() {
           btntext={"Find Jobs"}
         />
       </HeaderSec>
-      <JobsMenu/>
+      <JobsMenu />
     </main>
   );
 }

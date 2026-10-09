@@ -1,71 +1,61 @@
+import { useContext, useMemo } from "react";
 import { filtercontext } from "../../../context/filterstates";
-import { jobcontext } from "../../../context/JobContext";
-import { useContext } from "react";
+import { useSavedJobs } from "../hooks/useCandidateQueries";
+import { toSavedJobCard } from "../services/candidateAdapters";
 import FindJobCard from "../../public/components/FindJobCard";
 import NoSavedJobs from "./NoSaved";
 
 export default function AllSaved() {
+  const { data: rawWishlist = [], isLoading, isError, myApplications = [] } = useSavedJobs();
+  const { jobChecked, radioChecked } = useContext(filtercontext);
 
-    const { jobs } = useContext(jobcontext);
-    const { jobChecked, radioChecked } = useContext(filtercontext);
-
-    const savedJobs = jobs.filter((job) => job.isSaved === true);
-
-      if (savedJobs.length === 0) {
-        return <NoSavedJobs />;
-      }
-    //main
-    const savedMapped = savedJobs.map((job) => {
-        return {
-            data: job,
-            card: <FindJobCard key={job.id} job={job} />,
-        }
-    }
+  const adaptedJobs = useMemo(() => {
+    const appliedJobIds = new Set(
+      myApplications
+        .map((a) => a.job?._id ?? a.job?.id ?? a.jobId)
+        .filter(Boolean)
     );
-    
-    let filter= savedMapped;
-    
-    if (jobChecked.categorey.length > 0) {
-      filter = filter.filter((f) => {
-        return jobChecked.categorey.includes(f.data.categorey);
-      });
-    }
-    
-    if (jobChecked.date.length > 0) {
-      filter = filter.filter((f) => {
-        return jobChecked.date.includes(f.data.publication);
-      });
-    }
-    
-    if (jobChecked.education.length > 0) {
-      filter = filter.filter((f) => {
-        return jobChecked.education.includes(f.data.education);
-      });
-    }
-    
-    if (jobChecked.jobtype.length > 0) {
-      filter = filter.filter((f) => {
-        return jobChecked.jobtype.includes(f.data.type);
-      });
-    }
-    
-    if (radioChecked) {
-      filter = filter.filter((f) => {
-        return radioChecked.includes(f.data.salary);
-      });
-    }
-    
-    if (jobChecked.mode.length > 0) {
-      filter = filter.filter((f) => {
-        return jobChecked.mode.includes(f.data.location);
-      });
-    }
-    
-    let filtermap = filter.map((m) => {
-      return m.card;
-    });
-    
+    return rawWishlist.map((item) => toSavedJobCard(item, appliedJobIds));
+  }, [rawWishlist, myApplications]);
+
+  if (isLoading) {
     return (
-        <>{filtermap}</>
+      <div className="col-span-2 py-12 text-center text-sm text-gray-500">
+        Loading saved jobs…
+      </div>
     );
+  }
+  if (isError) {
+    return (
+      <div className="col-span-2 py-12 text-center text-sm text-red-500">
+        Failed to load saved jobs.
+      </div>
+    );
+  }
+  if (adaptedJobs.length === 0) return <NoSavedJobs />;
+
+  let filter = adaptedJobs;
+
+  if (jobChecked.categorey.length > 0) {
+    filter = filter.filter((f) => jobChecked.categorey.includes(f.categorey));
+  }
+  if (jobChecked.date.length > 0) {
+    filter = filter.filter((f) => jobChecked.date.includes(f.publication));
+  }
+  if (jobChecked.education.length > 0) {
+    filter = filter.filter((f) => jobChecked.education.includes(f.education));
+  }
+  if (jobChecked.jobtype.length > 0) {
+    filter = filter.filter((f) => jobChecked.jobtype.includes(f.type));
+  }
+  if (radioChecked) {
+    filter = filter.filter((f) => radioChecked.includes(f.salary));
+  }
+  if (jobChecked.mode.length > 0) {
+    filter = filter.filter((f) => jobChecked.mode.includes(f.location));
+  }
+
+  if (filter.length === 0) return <NoSavedJobs />;
+
+  return <>{filter.map((job) => <FindJobCard key={job.id} job={job} />)}</>;
 }

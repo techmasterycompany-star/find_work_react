@@ -12,9 +12,7 @@ export default function StepIndicator({ steps, currentStep }) {
             key={label}
             className="flex items-start flex-1 last:flex-none"
           >
-            {/* Step */}
             <div className="w-[40px] flex flex-col items-center shrink-0">
-              {/* Circle */}
               <div
                 className={`
                   w-[24px]
@@ -52,7 +50,6 @@ export default function StepIndicator({ steps, currentStep }) {
                 )}
               </div>
 
-              {/* Label */}
               <span
                 className={`
                   mt-[4px]
@@ -70,7 +67,6 @@ export default function StepIndicator({ steps, currentStep }) {
               </span>
             </div>
 
-            {/* Connector */}
             {stepNum < steps.length && (
               <div
                 className={`
