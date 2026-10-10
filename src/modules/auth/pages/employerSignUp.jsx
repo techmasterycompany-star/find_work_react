@@ -4,7 +4,7 @@ import FormField from '../../../components/FormField';
 import SelectField from '../../../components/SelectField';
 import SignupWizardShell from '../components/SignupWizardShell';
 import ReviewSummaryCard from '../components/ReviewSummaryCard';
-import useSignupWizard from '../hooks/useSignupWizard';
+import useSignupWizard from '../hooks/Usesignupwizard';
 import { register } from '../services/authApi';
 
 const INDUSTRY_OPTIONS = [
