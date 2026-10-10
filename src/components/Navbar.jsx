@@ -29,7 +29,7 @@ const NAV_CONFIG = {
     menu: [
       { label: "Company Profile", to: "/employer" },
       { label: "Analytics", to: "/employer/analytics" },
-      { label: "My Jobs", to: "/employer/posting" },
+      { label: "My Jobs", to: "/employer/myjobs" },
       { label: "Notifications", to: "/employer/notifications" },
       { label: "Settings", to: "/employer/settings" },
     ],
