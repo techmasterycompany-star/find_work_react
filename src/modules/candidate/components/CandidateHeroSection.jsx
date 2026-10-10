@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import photo7 from "../../../assets/photo7.jpg";
 import { useAuth } from "../../../context/AuthContext";
 import { useMyApplications, useCandidateProfile } from "../hooks/useCandidateQueries";
 import { usePublicJobs } from "../../public/hooks/usePublicQueries";

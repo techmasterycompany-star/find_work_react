@@ -8,8 +8,6 @@ export default function FindJobCard({ job, onSave }) {
   function SaveJob() {
     setclicked(!clicked);
 
-    console.log(job.id);
-
     onSave(job.id);
   }
 

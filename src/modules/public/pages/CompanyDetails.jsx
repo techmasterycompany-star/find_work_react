@@ -10,9 +10,6 @@ import {
   RiLinkedinFill,
   RiGithubFill,
 } from "react-icons/ri";
-import CompanyCommentsCard from "../../employer/components/CompanyComments";
-import JobCard from "../../employer/components/JobCard";
-import EmployerCard from "../../employer/components/EmployerCard";
 import CompanyCard from "../../employer/components/CompaniesCard";
 import {
   useCompanyById,

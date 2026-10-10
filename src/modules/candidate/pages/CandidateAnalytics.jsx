@@ -25,9 +25,6 @@ import {
 import { statusBadge } from "../services/candidateAdapters";
 import { HiOutlineCalendar, HiOutlineChevronDown } from "react-icons/hi2";
 
-const STATUS_BADGE = statusBadge("accepted"); 
-void STATUS_BADGE; 
-
 function StatCard({ label, value, deltaPct, deltaDir, periodLabel }) {
   const deltaColor =
     deltaDir === "up"

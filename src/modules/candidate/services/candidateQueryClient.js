@@ -1,13 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
-
-export const candidateQueryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 30 * 1000, refetchOnWindowFocus: true, retry: 1 },
-    mutations: { retry: 0 },
-  },
-});
-
-
 export const candidateKeys = {
   profile: ["candidate", "profile"],
   skills: ["candidate", "skills"],

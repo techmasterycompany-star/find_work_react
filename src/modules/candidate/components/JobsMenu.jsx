@@ -7,8 +7,6 @@ import ActiveSaved from "./ActiveSavedFilter";
 import AppliedSaved from "./AppliedSaved";
 import UnAppliedSaved from "./UnAppliedSaved";
 import ExpiredSaved from "./ExpiredSaved";
-import NoSavedJobs from "./NoSaved";
-
 
 export default function JobsMenu() {
   const [displayvalue, setdisplayvalue] = useState("all");

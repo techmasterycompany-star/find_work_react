@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {
   HiOutlineUserCircle,
   HiOutlineBell,
@@ -68,7 +68,6 @@ function getInitials(name = "") {
 
 export default function SettingsSidebar({ activeTab, onChangeTab }) {
   const navigate = useNavigate();
-  const location = useLocation();
   const { user, clearSession } = useAuth();
 
   const handleItemClick = (tab) => {

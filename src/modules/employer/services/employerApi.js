@@ -87,9 +87,7 @@ export const uploadEmployerLogo = (file) => {
   const formData = new FormData();
   formData.append("logo", file);
   return apiClient
-    .post("/employer/logo", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
+    .post("/employer/logo", formData)
     .then((res) => res.data?.data ?? res.data);
 };
 

@@ -1,9 +1,9 @@
 import "./App.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider } from "./context/UsersContext";
-import { JobProvider } from "./context/JobContext";
 import { AuthProvider } from "./context/AuthContext";
 import { AppRoutes } from "./app/routes";
+import ErrorBoundary from "./app/ErrorBoundary";
 import { FilterProvider } from "./context/filterstates";
 import { CompanyProvider } from "./context/CompanyContext";
 import { EmployerProvider } from "./context/EmployerContext";
@@ -13,17 +13,15 @@ function App() {
   return (
     <QueryClientProvider client={employerQueryClient}>
       <UserProvider>
-        <JobProvider>
-          <FilterProvider>
-            <CompanyProvider>
-              <EmployerProvider>
-                <AuthProvider>
-                  <AppRoutes />
-                </AuthProvider>
-              </EmployerProvider>
-            </CompanyProvider>
-          </FilterProvider>
-        </JobProvider>
+        <FilterProvider>
+          <CompanyProvider>
+            <EmployerProvider>
+              <AuthProvider>
+                <AppRoutes />
+              </AuthProvider>
+            </EmployerProvider>
+          </CompanyProvider>
+        </FilterProvider>
       </UserProvider>
     </QueryClientProvider>
   );

@@ -28,11 +28,7 @@ export const updateCandidateSkills = (skills) =>
 export const uploadCandidateResume = (file) => {
   const formData = new FormData();
   formData.append("resume", file);
-  return apiClient
-    .post("/candidate/resume", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-    .then(unwrap);
+  return apiClient.post("/candidate/resume", formData).then(unwrap);
 };
 
 export const getMyApplications = () =>

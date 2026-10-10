@@ -4,8 +4,8 @@ import { CompanyContext } from "../../../context/CompanyContext";
 import CompanyCard from "./CompaniesCard";
 
 export default function MostMostRatedComapny() {
-  const {companyData} = useContext(CompanyContext);
-  const { companyChecked,radioChecked } = useContext(filtercontext);
+  const { companyData } = useContext(CompanyContext);
+  const { companyChecked, radioChecked } = useContext(filtercontext);
 
   const highestReviews = Math.max(
     ...companyData.map((rate) => {
@@ -19,43 +19,33 @@ export default function MostMostRatedComapny() {
     }),
   );
 
-  console.log(highestRates);
-
-
   const filteredRates = companyData.filter((r) => {
     return r.ratings === highestRates && r.reviews === highestReviews;
   });
-  
 
   let filter = filteredRates;
 
-if (companyChecked.categorey.length > 0) {
-  filter = filter.filter((f) => {
-    return companyChecked.categorey.includes(f.categorey);
-  });
-}
+  if (companyChecked.categorey.length > 0) {
+    filter = filter.filter((f) => {
+      return companyChecked.categorey.includes(f.categorey);
+    });
+  }
 
-if (companyChecked.size.length > 0) {
-  filter = filter.filter((f) => {
-    return companyChecked.size.includes(f.size);
-  });
-}
+  if (companyChecked.size.length > 0) {
+    filter = filter.filter((f) => {
+      return companyChecked.size.includes(f.size);
+    });
+  }
 
-if (radioChecked) {
-  filter = filter.filter((f) => {
-    return radioChecked.includes(f.salary);
-  });
-}
-
+  if (radioChecked) {
+    filter = filter.filter((f) => {
+      return radioChecked.includes(f.salary);
+    });
+  }
 
   let filtermap = filter.map((m) => {
     return <CompanyCard key={m.id} company={m} />;
   });
 
-  return (
-    <>
-      {filtermap}
-    </>
-  );
-
+  return <>{filtermap}</>;
 }

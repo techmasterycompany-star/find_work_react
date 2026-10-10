@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import EmployerHome from "../modules/employer/pages/EmployerHome";
 import EmployerJobPostPage from "../modules/employer/pages/EmployerJobPostPage";
-import PricingPage from "../modules/employer/pages/Pricingpage";
+import PricingPage from "../modules/employer/pages/PricingPage";
 import CandidatesPage from "../modules/employer/pages/CandidatesPage";
 import CandidateProfilePage from "../modules/employer/pages/CandidateProfilePage";
 import EmployerNotifications from "../modules/employer/pages/EmployerNotifications";
