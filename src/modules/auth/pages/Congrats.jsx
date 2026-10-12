@@ -6,8 +6,7 @@ export default function Congrats() {
 
   const role = searchParams.get("role") || "candidate";
 
-  const dashboardPath =
-    role === "employer" ? "/employer/home" : "/candidate/home";
+  const loginPath = "/auth/login";
 
   const roleText = role === "employer" ? "employer" : "candidate";
 
@@ -80,15 +79,14 @@ export default function Congrats() {
               </p>
 
               <p className="max-w-[650px] text-[14px] leading-5 text-[#71717A]">
-                Welcome to Job4U! Your profile is ready. Start exploring
-                thousands of freelance opportunities from top companies
-                worldwide.
+                Welcome to Job4U! Your account is ready. Please log in to access
+                your dashboard and start exploring opportunities.
               </p>
             </div>
 
             <div className="w-full">
               <Link
-                to={dashboardPath}
+                to={loginPath}
                 className="
                   flex
                   h-12
@@ -115,7 +113,7 @@ export default function Congrats() {
             <p className="text-[12px] text-[#71717A]">
               Or, back to{" "}
               <Link
-                to="/jobs"
+                to="/"
                 className="font-medium text-[#7C3AED] hover:underline"
               >
                 Explore Job Directory

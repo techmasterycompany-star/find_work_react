@@ -10,7 +10,7 @@ export default function AuthLayout({ children }) {
         <div
           className="
             w-[540px]
-            h-[726px]
+            min-h-[726px]
             bg-white
             rounded-[16px]
             p-[40px]
