@@ -28,9 +28,9 @@ export const approveJob = (jobId) =>
     .post(`/admin/approve/${jobId}`)
     .then((res) => res.data?.data ?? res.data);
 
-export const rejectJob = (jobId) =>
+export const rejectJob = ({ jobId, rejectionReason = "Rejected by admin" }) =>
   apiClient
-    .post(`/admin/reject/${jobId}`)
+    .post(`/admin/reject/${jobId}`, { rejection_reason: rejectionReason })
     .then((res) => res.data?.data ?? res.data);
 
 

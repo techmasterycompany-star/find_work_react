@@ -1,7 +1,3 @@
-// ErrorBoundary — catches uncaught render errors so a single broken
-// component doesn't unmount the whole app (white-screen prevention).
-// Usage: <ErrorBoundary><AppRoutes /></ErrorBoundary>
-
 import { Component } from "react";
 
 export default class ErrorBoundary extends Component {
@@ -15,7 +11,6 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    // In production, send this to your error tracker (Sentry, etc.)
     console.error("Uncaught render error:", error, info);
   }
 

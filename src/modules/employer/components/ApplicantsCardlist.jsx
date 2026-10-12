@@ -1,8 +1,3 @@
-// ApplicantsCardlist — renders a list of ApplicantsCard items.
-// Created during PR #18 integration (original was deleted by PR but still imported).
-// Currently uses mock data from UsersContext. To wire to real API, replace
-// useContext with: useJobApplications(jobId) from useEmployerQueries.js
-
 import { useContext } from "react";
 import { UserContext } from "../../../context/UsersContext";
 import ApplicantsCard from "./ApplicantsCard";

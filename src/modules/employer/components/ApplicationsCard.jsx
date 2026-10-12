@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import { jobcontext } from "../../../context/JobContext";
 import { CompanyContext } from "../../../context/CompanyContext";
 import { Button } from "@mui/material";
 import ButtonFull from "./Buttonfull";
 import { Link } from "react-router-dom";
 
 export default function ApplicationsCard() {
-  const { jobdata } = useContext(jobcontext);
+   const jobdata = [];
 
 
   const { companyData } = useContext(CompanyContext);

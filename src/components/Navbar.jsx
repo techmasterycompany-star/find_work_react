@@ -32,6 +32,7 @@ const NAV_CONFIG = {
       { label: "My Jobs", to: "/employer/myjobs" },
       { label: "Notifications", to: "/employer/notifications" },
       { label: "Settings", to: "/employer/settings" },
+      { label: "Log Out", to: "__logout__" },
     ],
   },
   candidate: {

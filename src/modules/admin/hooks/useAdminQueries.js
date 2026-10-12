@@ -13,13 +13,21 @@ import {
 } from '../services/adminApi';
 import { adminKeys } from '../services/queryClient';
 
-// ---------- Users ----------------------------------------------------
 
 export function useAdminUsers() {
   return useQuery({
     queryKey: adminKeys.users,
     queryFn: getAdminUsers,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -53,7 +61,16 @@ export function useReviewJobs() {
   return useQuery({
     queryKey: adminKeys.reviewJobs,
     queryFn: getReviewJobs,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -85,7 +102,16 @@ export function useAllJobs() {
   return useQuery({
     queryKey: adminKeys.allJobs,
     queryFn: getAllJobs,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -95,7 +121,16 @@ export function useAdminNotifications() {
   return useQuery({
     queryKey: adminKeys.notifications,
     queryFn: getMyNotifications,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 

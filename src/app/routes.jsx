@@ -33,6 +33,7 @@ import CandidateSettings from "../modules/candidate/pages/CandidateSettings";
 import CandidateNotifications from "../modules/candidate/pages/CandidateNotifications";
 import EmployerAnalytics from "../modules/employer/pages/EmployerAnalytics";
 import MyJobs from "../modules/employer/pages/MyJobs";
+import EmployerSettings from "../modules/employer/pages/EmployerSettings";
 import ApplicationList from "../modules/employer/pages/ApplicationList";
 import ApplicantDetails from "../modules/employer/pages/ApplicantDetails";
 import JobDetails from "../modules/public/pages/JobDetails";
@@ -91,6 +92,7 @@ export function AppRoutes() {
               <Route path="pricing" element={<PricingPage />} />
               <Route path="analytics" element={<EmployerAnalytics />} />
               <Route path="myjobs" element={<MyJobs />} />
+              <Route path="settings" element={<EmployerSettings />} />
               <Route path="myjobs/applicants/:jobId" element={<ApplicationList />} />
               <Route path="myjobs/applicants/:jobId/profile/:profileId" element={<ApplicantDetails />} />
               <Route path="notifications" element={<EmployerNotifications />} />

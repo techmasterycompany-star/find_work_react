@@ -1,18 +1,3 @@
-// =====================================================================
-// JobManagement — wired to /admin/reviewjobs + /admin/approve + /admin/reject
-// ---------------------------------------------------------------------
-// The original page kept `initialJobs` in useState and updated status
-// locally. Now:
-//   - jobs come from useReviewJobs() (react-query)
-//   - approve/reject call the real mutations
-//   - on success, react-query invalidates ['admin','review-jobs'] so
-//     the table refreshes automatically.
-//
-// The child components (JobStatsCards, JobsFilters, JobsTable,
-// JobDetailsModal) are kept untouched — they receive the same shape
-// of props they had before.
-// =====================================================================
-
 import { useMemo, useState } from 'react';
 import JobsFilters from '../components/JobsFilters';
 import JobsTable from '../components/JobsTable';
@@ -24,13 +9,12 @@ import { toJobRow } from '../services/adminAdapters';
 const PAGE_SIZE = 10;
 
 export default function JobMangement() {
-  // ----- Data -----
+
   const { data: rawJobs = [], isLoading, isError, error } = useReviewJobs();
   const approveMutation = useApproveJob();
   const rejectMutation = useRejectJob();
 
-  // ----- UI state (same as original) -----
-  const [tab, setTab] = useState('all'); // all | pending | approved | rejected
+  const [tab, setTab] = useState('all'); 
   const [search, setSearch] = useState('');
   const [date, setDate] = useState('');
   const [page, setPage] = useState(1);
@@ -85,21 +69,20 @@ export default function JobMangement() {
     setPage(1);
   };
 
-  // ----- Mutations -----
   const handleApprove = (jobId) => {
     approveMutation.mutate(jobId, {
       onSuccess: () => setSelected(null),
       onError: () => {
-        /* keep modal open so the admin sees the failure */
       },
     });
   };
 
-  const handleReject = (jobId) => {
-    rejectMutation.mutate(jobId, {
-      onSuccess: () => setSelected(null),
-    });
-  };
+ const handleReject = (jobId) => {
+  rejectMutation.mutate(
+    { jobId, rejectionReason: "Rejected by admin" },
+    { onSuccess: () => setSelected(null) }
+  );
+};
 
   const mutatingId = approveMutation.variables ?? rejectMutation.variables;
 
