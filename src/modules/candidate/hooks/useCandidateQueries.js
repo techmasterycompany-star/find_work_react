@@ -24,13 +24,35 @@ export function useSavedJobs() {
   const savedJobsQuery = useQuery({
     queryKey: candidateKeys.savedJobs,
     queryFn: getSavedJobs,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 
   const myAppsQuery = useQuery({
     queryKey: candidateKeys.myApplications,
     queryFn: getMyApplications,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 
   return {
@@ -115,7 +137,18 @@ export function useMyApplications() {
   return useQuery({
     queryKey: candidateKeys.myApplications,
     queryFn: getMyApplications,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -133,7 +166,18 @@ export function useCandidateNotifications() {
   return useQuery({
     queryKey: candidateKeys.notifications,
     queryFn: getCandidateNotifications,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -162,7 +206,18 @@ export function useCategories() {
     queryKey: candidateKeys.categories,
     queryFn: getCategories,
     retry: false,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -170,6 +225,17 @@ export function useTechnologies() {
   return useQuery({
     queryKey: candidateKeys.technologies,
     queryFn: getTechnologies,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }

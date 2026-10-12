@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormField from "../../../components/FormField";
 import SelectField from "../../../components/SelectField";
 import useJobPostFlow from "../hooks/useJobPostFlow";
@@ -88,6 +89,7 @@ function ReviewSection({ title, onEdit, children }) {
 }
 
 export default function EmployerJobPostPage() {
+  const navigate = useNavigate();
   const flow = useJobPostFlow();
   const fileInput = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -276,22 +278,20 @@ export default function EmployerJobPostPage() {
             ✓
           </div>
           <h1 className="mt-5 text-2xl font-bold text-gray-900">
-            Job published!
+            Job submitted for review!
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            "{formData.jobTitle}" has been submitted to the backend and will
-            appear in your active postings shortly. Your company profile and
-            logo have also been updated.
+            "{formData.jobTitle}" has been submitted to the backend and is now
+            pending admin approval. Once approved, it will appear in your
+            active postings. Your company profile and logo have also been
+            updated.
           </p>
           <button
             type="button"
-            onClick={() => {
-              setStep(5);
-              setIsPublished(false);
-            }}
+            onClick={() => navigate('/employer')}
             className="mt-6 text-sm font-semibold text-primary hover:underline"
           >
-            Return to review
+            Back to dashboard
           </button>
         </section>
       </main>

@@ -96,7 +96,18 @@ export function usePublicCategories() {
     queryKey: ["public", "categories"],
     queryFn: getPublicCategories,
     retry: false,
-    select: (data) => (Array.isArray(data) ? data : (data?.items ?? [])),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -105,6 +116,17 @@ export function usePublicTechnologies() {
     queryKey: ["public", "technologies"],
     queryFn: getPublicTechnologies,
     retry: false,
-    select: (data) => (Array.isArray(data) ? data : (data?.items ?? [])),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }

@@ -33,7 +33,18 @@ export function useEmployerJobs() {
   return useQuery({
     queryKey: employerKeys.jobs,
     queryFn: getEmployerJobs,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -41,7 +52,18 @@ export function useJobApplications(jobId, options = {}) {
   return useQuery({
     queryKey: employerKeys.jobApplications(jobId),
     queryFn: () => getJobApplications(jobId),
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
     enabled: Boolean(jobId),
     ...options,
   });
@@ -92,7 +114,18 @@ export function useTechnologies() {
   return useQuery({
     queryKey: employerKeys.technologies,
     queryFn: getTechnologies,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -102,7 +135,18 @@ export function useCategories() {
   return useQuery({
     queryKey: employerKeys.categories,
     queryFn: getCategories,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
     // Fail silently — the page falls back to the hardcoded config
     retry: false,
   });
@@ -139,7 +183,18 @@ export function useSubscriptionPlans() {
   return useQuery({
     queryKey: employerKeys.subscriptionPlans,
     queryFn: getSubscriptionPlans,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -170,7 +225,18 @@ export function usePayments() {
   return useQuery({
     queryKey: employerKeys.payments,
     queryFn: getPayments,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 
@@ -198,7 +264,18 @@ export function useJobComments(jobId, options = {}) {
   return useQuery({
     queryKey: ['employer', 'comments', jobId],
     queryFn: () => getJobComments(jobId),
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
     enabled: Boolean(jobId),
     ...options,
   });
@@ -210,7 +287,18 @@ export function useEmployerNotifications() {
   return useQuery({
     queryKey: employerKeys.notifications,
     queryFn: getEmployerNotifications,
-    select: (data) => (Array.isArray(data) ? data : data?.items ?? []),
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.users)) return data.users;
+      if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
+      if (Array.isArray(data?.notifications)) return data.notifications;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.docs)) return data.docs;
+      return [];
+    },
   });
 }
 

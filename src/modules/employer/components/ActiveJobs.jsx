@@ -1,10 +1,12 @@
 import { HiUserGroup } from "react-icons/hi";
 import { HiChartBar } from "react-icons/hi";
 import { HiCog6Tooth } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import { useEmployerJobs } from "../hooks/useEmployerQueries";
 import { toEmployerJobCard } from "../services/employerAdapters";
 
 export default function Jobs() {
+  const navigate = useNavigate();
   const { data: rawJobs = [], isLoading, isError, error } = useEmployerJobs();
 
   const jobs = rawJobs.map(toEmployerJobCard);
@@ -76,6 +78,7 @@ export default function Jobs() {
             </div>
             <div className="actions flex gap-3 w-full">
               <button
+                onClick={() => navigate('/employer/myjobs/applicants/' + job.id)}
                 className="flex items-center justify-center w-full h-10 py-2 px-4  bg-primary text-white
                 font-bold border-0 rounded-2sm cursor-pointer text-md"
               >

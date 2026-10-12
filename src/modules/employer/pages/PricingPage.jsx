@@ -21,8 +21,9 @@ export default function PricingPage() {
         },
         onSuccess: (data) => {
           // If the backend returns a Stripe checkout URL, redirect to it
-          if (data?.url) {
-            window.location.href = data.url;
+                    const checkoutUrl = data?.checkoutUrl ?? data?.url ?? data?.session?.url;
+          if (checkoutUrl) {
+            window.location.href = checkoutUrl;
           }
         },
       },

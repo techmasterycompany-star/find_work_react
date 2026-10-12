@@ -23,6 +23,8 @@ export function useAdminUsers() {
       if (Array.isArray(data?.items)) return data.items;
       if (Array.isArray(data?.users)) return data.users;
       if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
       if (Array.isArray(data?.notifications)) return data.notifications;
       if (Array.isArray(data?.data)) return data.data;
       if (Array.isArray(data?.docs)) return data.docs;
@@ -66,6 +68,8 @@ export function useReviewJobs() {
       if (Array.isArray(data?.items)) return data.items;
       if (Array.isArray(data?.users)) return data.users;
       if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
       if (Array.isArray(data?.notifications)) return data.notifications;
       if (Array.isArray(data?.data)) return data.data;
       if (Array.isArray(data?.docs)) return data.docs;
@@ -107,6 +111,8 @@ export function useAllJobs() {
       if (Array.isArray(data?.items)) return data.items;
       if (Array.isArray(data?.users)) return data.users;
       if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
       if (Array.isArray(data?.notifications)) return data.notifications;
       if (Array.isArray(data?.data)) return data.data;
       if (Array.isArray(data?.docs)) return data.docs;
@@ -126,6 +132,8 @@ export function useAdminNotifications() {
       if (Array.isArray(data?.items)) return data.items;
       if (Array.isArray(data?.users)) return data.users;
       if (Array.isArray(data?.jobs)) return data.jobs;
+      if (Array.isArray(data?.categories)) return data.categories;
+      if (Array.isArray(data?.technologies)) return data.technologies;
       if (Array.isArray(data?.notifications)) return data.notifications;
       if (Array.isArray(data?.data)) return data.data;
       if (Array.isArray(data?.docs)) return data.docs;

@@ -15,13 +15,13 @@ export function Banner() {
         </p>
         <div className="mt-8 flex items-center justify-center gap-4">
           <Link
-            to="/auth/role-select"
+            to="/candidate/pricing"
             className="px-6 py-3 rounded-lg bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700"
           >
             Upgrade to Premium — $9/mo
           </Link>
           <Link
-            to="/jobs"
+            to="/candidate/pricing"
             className="px-6 py-3 rounded-lg border border-white text-sm font-semibold text-white hover:bg-zinc-800"
           >
             Compare Plans

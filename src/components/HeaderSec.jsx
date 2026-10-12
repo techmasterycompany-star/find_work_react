@@ -26,13 +26,11 @@ export default function HeaderSec({
               {description}
             </p>
           </div>
-          <div className="img w-[320px] h-[180px]">
-            {img && (
-              <div className="img w-[320px] h-[180px]">
-                <img className="max-w-full" src={img} alt="photo" />
-              </div>
-            )}{" "}
-          </div>
+          {img && (
+            <div className="img w-[320px] h-[180px]">
+              <img className="max-w-full" src={img} alt="photo" />
+            </div>
+          )}
         </div>
         <div className="mt-12 flex-center">{children}</div>
       </section>
